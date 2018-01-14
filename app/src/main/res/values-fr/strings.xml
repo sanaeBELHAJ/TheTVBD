@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The TVBD</string>
+    <string name="search">Recherche</string>
+    <string name="title_search">Titre du film, série animé</string>
+    <string name="series">Séries</string>
+</resources>
