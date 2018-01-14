@@ -1,4 +1,4 @@
-package com.example.sanaebelhaj.thetvbd.Model;
+package com.example.sanaebelhaj.thetvbd.Models;
 
 import java.util.List;
 
