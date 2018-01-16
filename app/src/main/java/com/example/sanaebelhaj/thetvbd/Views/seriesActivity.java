@@ -2,12 +2,14 @@ package com.example.sanaebelhaj.thetvbd.Views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBRepo;
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Views.Adapter.TheTVDBRepoAdapter;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class seriesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<TheTVDBRepo>> call, Response<List<TheTVDBRepo>> response) {
                 List<TheTVDBRepo> repos = response.body();
-                listView.setAdapter(new TheTVDBRepoAdapter(seriesActivity.this,repos));
+                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(seriesActivity.this,repos));
             }
 
             @Override

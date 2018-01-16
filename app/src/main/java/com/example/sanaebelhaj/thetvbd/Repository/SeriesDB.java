@@ -16,6 +16,16 @@ public class SeriesDB extends SQLiteOpenHelper {
     public static final String SERIES_IMAGE = "image";
     public static final String SERIES_POSTER = "poster";
 
+    public static final String SERIES_TABLE_NAME = "series";
+    public static final String SERIES_TABLE_CREATE =
+            "CREATE TABLE " + SERIES_TABLE_NAME + " (" +
+                    SERIES_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    SERIES_NOTEUSER + " INTEGER, " +
+                    SERIES_NOTETVDB + " INTEGER, " +
+                    SERIES_IMAGE + " TEXT, " +
+                    SERIES_POSTER + " TEXT);";
+    public static final String SERIES_TABLE_DROP = "DROP TABLE IF EXISTS " + SERIES_TABLE_NAME + ";";
+
 
 
 
@@ -24,12 +34,13 @@ public class SeriesDB extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(SERIES_TABLE_CREATE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL(SERIES_TABLE_DROP);
+        onCreate(db);
     }
 }

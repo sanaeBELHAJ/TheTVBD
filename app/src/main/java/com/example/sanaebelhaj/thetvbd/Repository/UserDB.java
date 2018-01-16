@@ -24,7 +24,7 @@ public class UserDB extends SQLiteOpenHelper {
                     USER_LASTNAME + " TEXT, " +
                     USER_EMAIL + " TEXT, " +
                     USER_PWD + " TEXT);";
-    public static final String METIER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
+    public static final String USER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
 
     public UserDB(Context context , String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -37,7 +37,7 @@ public class UserDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(USER_TABLE_NAME);
+        db.execSQL(USER_TABLE_DROP);
         onCreate(db);
     }
 }
