@@ -1,4 +1,4 @@
-package com.example.sanaebelhaj.thetvbd;
+package com.example.sanaebelhaj.thetvbd.Views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.sanaebelhaj.thetvbd.R;
 
 public class MainActivity extends AppCompatActivity {
 
