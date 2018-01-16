@@ -26,7 +26,7 @@ public class UserDB extends SQLiteOpenHelper {
                     USER_PWD + " TEXT);";
     public static final String METIER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
 
-    public UserDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public UserDB(Context context , String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

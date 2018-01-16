@@ -5,6 +5,7 @@ package com.example.sanaebelhaj.thetvbd.Models;
  */
 
 public class User {
+    private long id;
     public String firstname;
     public String lastname;
     public String email;
@@ -16,9 +17,14 @@ public class User {
         this.email = email;
         this.pwd = pwd;
     }
+    public long getId(){
+        return id;
+    }
+
     public String getFirstname(){
         return firstname;
     }
+
     public String getLastname(){
         return lastname;
     }
