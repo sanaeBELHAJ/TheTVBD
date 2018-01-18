@@ -24,8 +24,10 @@ public class UserController  extends UserDB{
 
         values.put("firstname", user.firstname);
         values.put("lastname", user.firstname);
+        values.put("pseudo", user.pseudo);
         values.put("email", user.email);
         values.put("pwd", user.pwd);
+        values.put("language", user.language);
 
         SQLiteDatabase db = this.getWritableDatabase();
 

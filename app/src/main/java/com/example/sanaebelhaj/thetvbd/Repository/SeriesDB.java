@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SeriesDB extends SQLiteOpenHelper {
 
     public static final String SERIES_KEY = "id";
+    public static final String SERIES_TITLE = "title";
     public static final String SERIES_NOTEUSER = "note_user";
     public static final String SERIES_NOTETVDB = "note_tvdb";
     public static final String SERIES_IMAGE = "image";
@@ -20,6 +21,7 @@ public class SeriesDB extends SQLiteOpenHelper {
     public static final String SERIES_TABLE_CREATE =
             "CREATE TABLE " + SERIES_TABLE_NAME + " (" +
                     SERIES_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    SERIES_TITLE +" TEXT, "+
                     SERIES_NOTEUSER + " INTEGER, " +
                     SERIES_NOTETVDB + " INTEGER, " +
                     SERIES_IMAGE + " TEXT, " +
