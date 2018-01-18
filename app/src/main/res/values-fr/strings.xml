@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">The TVBD</string>
-    <string name="search">Recherche</string>
-    <string name="title_search">Titre du film, série animé</string>
-    <string name="series">Séries</string>
+
+    <!-- ACCOUNT -->
+    <string name="login">Pseudo :</string>
+    <string name="pwd">Mot de passe :</string>
+    <string name="account_header">Votre compte</string>
+    <string name="email">Adresse email :</string>
+    <string name="language_select">Choisissez votre langue :</string>
+    <string name="submit">Valider</string>
+
+    <!-- SEARCH -->
+    <string name="search_header">Rechercher</string>
+    <string name="search_title">Nom d\'une série</string>
+
+    <!-- LIST -->
+    <string name="series_header">Liste des séries</string>
+
+    <!-- ELEMENT -->
+    <string name="serie_header">Fiche d\'une série</string>
+    <string name="serie_mark_tvdb">Note de TVDB :</string>
+    <string name="serie_mark_user">Votre note :</string>
+    <string name="serie_chapters">Episodes</string>
+    <string name="serie_pictures">Images</string>
+    <string name="serie_poster">Poster</string>
+    <string name="serie_favorite_add">Ajouter dans vos favoris</string>
+    <string name="serie_favorite_remove">Retirer de vos favoris</string>
+    <string name="serie_share">Partager la série</string>
+    <string name="serie_actor">Accéder à la fiche web de l\'acteur</string>
 </resources>

@@ -1,6 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">The TVBD</string>
-    <string name="title_search">Movie, series, anime title</string>
-    <string name="search">Search</string>
-    <string name="series">Series</string>
+
+    <!-- ACCOUNT -->
+    <string name="login">Login :</string>
+    <string name="pwd">Password :</string>
+    <string name="account_header">Your account</string>
+    <string name="email">Email address :</string>
+    <string name="language_select">Choose your language :</string>
+    <string name="submit">Submit</string>
+
+    <!-- SEARCH -->
+    <string name="search_header">Search</string>
+    <string name="search_title">Movie, series, anime title</string>
+
+    <!-- LIST -->
+    <string name="series_header">Series list</string>
+
+    <!-- ELEMENT -->
+    <string name="serie_header">Serie informations</string>
+    <string name="serie_mark_tvdb">Mark from TVDB :</string>
+    <string name="serie_mark_user">Mark from you :</string>
+    <string name="serie_chapters">Chapters</string>
+    <string name="serie_pictures">Pictures</string>
+    <string name="serie_poster">Poster</string>
+    <string name="serie_favorite_add">Add as a favorite serie</string>
+    <string name="serie_favorite_remove">Remove the favorite serie</string>
+    <string name="serie_share">Share the serie</string>
+    <string name="serie_actor">Access to the webpage of the actor</string>
 </resources>

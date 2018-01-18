@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sanaebelhaj.thetvbd.Views.SerieActivity">
+
+
+    <TextView
+        android:id="@+id/pseudoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Pseudo :" />
+
+    <EditText
+        android:id="@+id/pseudoInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pseudoText"
+        android:layout_alignBottom="@+id/pseudoText"
+        android:layout_toEndOf="@+id/pseudoText"
+        android:layout_toRightOf="@+id/pseudoText"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+
+    <TextView
+        android:id="@+id/passwordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pseudoText"
+        android:layout_alignStart="@+id/pseudoText"
+        android:layout_below="@+id/pseudoText"
+        android:layout_marginTop="64dp"
+        android:text="Mot de passe :" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/passwordText"
+        android:layout_alignBottom="@+id/passwordText"
+        android:layout_alignLeft="@+id/pseudoInput"
+        android:layout_alignStart="@+id/pseudoInput"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/passwordText"
+        android:layout_alignRight="@+id/passwordText"
+        android:layout_below="@+id/passwordText"
+        android:text="@string/submit" />
+
+</RelativeLayout>

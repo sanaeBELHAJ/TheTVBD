@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
         searchText  = (EditText) findViewById(R.id.searchText);
         btnSearch   = (Button) findViewById(R.id.btnSearch);
