@@ -8,6 +8,18 @@
 
 
     <TextView
+        android:id="@+id/accountHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/account_header"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
         android:id="@+id/pseudoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,14 +42,70 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pseudoText"
+        android:layout_alignStart="@+id/pseudoText"
+        android:layout_below="@+id/pseudoText"
+        android:layout_marginTop="64dp"
+        android:text="@string/email" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailText"
+        android:layout_alignBottom="@+id/pseudoText"
+        android:layout_toEndOf="@+id/pseudoText"
+        android:layout_toRightOf="@+id/pseudoText"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+    <TextView
+        android:id="@+id/languageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/emailText"
+        android:layout_alignStart="@+id/emailText"
+        android:layout_below="@+id/emailText"
+        android:layout_marginTop="64dp"
+        android:text="@string/language_select" />
+
+    <Spinner
+        android:id="@+id/list_languages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/languageText"
+        android:layout_below="@+id/languageText"
+        android:layout_marginTop="64dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
+
+    <!-- JAVA pour AccountActivity :
+
+    //get the spinner from the xml.
+    Spinner dropdown = findViewById(R.id.spinner1);
+    //create a list of items for the spinner.
+    String[] items = new String[]{"1", "2", "three"};
+    //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+    //There are multiple variations of this, but this is the basic variant.
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+    //set the spinners adapter to the previously created one.
+    dropdown.setAdapter(adapter);
+
+    -->
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/passwordText"
-        android:layout_alignRight="@+id/passwordText"
-        android:layout_below="@+id/passwordText"
-        android:text="valider" />
+        android:layout_alignLeft="@+id/languageText"
+        android:layout_alignStart="@+id/languageText"
+        android:layout_below="@+id/list_languages"
+        android:layout_marginTop="64dp"
+        android:text="@string/submit" />
 
 </RelativeLayout>

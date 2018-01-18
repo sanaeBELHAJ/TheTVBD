@@ -2,9 +2,12 @@
 <resources>
     <string name="app_name">The TVBD</string>
 
-    <!-- LOGIN -->
+    <!-- ACCOUNT -->
     <string name="login">Login :</string>
     <string name="pwd">Password :</string>
+    <string name="account_header">Your account</string>
+    <string name="email">Email address :</string>
+    <string name="language_select">Choose your language :</string>
     <string name="submit">Submit</string>
 
     <!-- SEARCH -->
