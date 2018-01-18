@@ -2,20 +2,20 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Accueil"
+    <item android:title="@string/menu_last_series"
           android:orderInCategory="100"
-          android:id="@+id/menu_home"
-    />
-    <item android:title="Séries"
-          android:orderInCategory="100"
-          android:id="@+id/menu_series"
+          android:id="@+id/menu_last_series"
         />
-    <item android:title="Paramètres"
-          android:orderInCategory="100"
-        android:id="@+id/menu_settings"
+    <item android:title="@string/menu_search"
+        android:orderInCategory="100"
+        android:id="@+id/menu_series"
         />
-    <item android:title="Aide"
+    <item android:title="@string/menu_account"
           android:orderInCategory="100"
-          android:id="@+id/menu_help"
+        android:id="@+id/menu_account"
+        />
+    <item android:title="@string/menu_logout"
+        android:orderInCategory="100"
+        android:id="@+id/menu_logout"
         />
 </menu>
