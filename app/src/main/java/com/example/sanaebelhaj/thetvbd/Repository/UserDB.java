@@ -13,8 +13,10 @@ public class UserDB extends SQLiteOpenHelper {
     public static final String USER_KEY = "id";
     public static final String USER_FIRSTNAME = "firstname";
     public static final String USER_LASTNAME = "lastname";
+    public static final String USER_PSEUDO = "pseudo";
     public static final String USER_EMAIL = "email";
     public static final String USER_PWD = "pwd";
+    public static final String USER_LANGUAGE = "language";
 
     public static final String USER_TABLE_NAME = "user";
     public static final String USER_TABLE_CREATE =
@@ -22,8 +24,11 @@ public class UserDB extends SQLiteOpenHelper {
                     USER_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     USER_FIRSTNAME + " TEXT, " +
                     USER_LASTNAME + " TEXT, " +
+                    USER_PSEUDO + " TEXT, " +
                     USER_EMAIL + " TEXT, " +
-                    USER_PWD + " TEXT);";
+                    USER_PWD + " TEXT,"+
+                    USER_LANGUAGE + " TEXT);";
+
     public static final String USER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
 
     public UserDB(Context context , String name, SQLiteDatabase.CursorFactory factory, int version) {

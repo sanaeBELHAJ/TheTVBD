@@ -19,6 +19,7 @@ public class SeriesController extends SeriesDB {
 
         ContentValues values = new ContentValues();
 
+        values.put("title", serie.title);
         values.put("note_user", serie.note_user);
         values.put("note_tvdb", serie.note_tvdb);
         values.put("image", serie.image);

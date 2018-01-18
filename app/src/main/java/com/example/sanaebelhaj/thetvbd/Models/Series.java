@@ -6,13 +6,15 @@ package com.example.sanaebelhaj.thetvbd.Models;
 
 public class Series {
     public long id;
+    public String title;
     public int note_user;
     public int note_tvdb;
     public String episode;
     public String image;
     public String poster;
 
-    public Series(int note_user, int note_tvdb, String episode, String image, String poster) {
+    public Series(String title, int note_user, int note_tvdb, String episode, String image, String poster) {
+        this.title = title;
         this.note_user = note_user;
         this.note_tvdb = note_tvdb;
         this.episode = episode;
@@ -21,6 +23,9 @@ public class Series {
     }
     public long getId(){
         return id;
+    }
+    public String getTitle(){
+        return title;
     }
     public int getNote_user(){
         return note_user;
@@ -37,6 +42,9 @@ public class Series {
     }
     public String getPoster(){
         return poster;
+    }
+    public void setTitle(String title){
+        this.title = title;
     }
     public void setNote_user(int note_user){
         this.note_user = note_user;
