@@ -1,6 +1,6 @@
 package com.example.sanaebelhaj.thetvbd.Views.Adapter;
 
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBRepo;
+import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Views.SeriesActivity;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class TheTVDBRepoAdapter {
-    public TheTVDBRepoAdapter(SeriesActivity seriesActivity, List<TheTVDBRepo> repos) {
+    public TheTVDBRepoAdapter(SeriesActivity seriesActivity, List<TheTVDBLogin> repos) {
 
     }
 }
