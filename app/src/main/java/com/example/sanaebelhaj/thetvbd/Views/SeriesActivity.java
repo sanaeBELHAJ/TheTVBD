@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -70,6 +72,18 @@ public class SeriesActivity extends AppCompatActivity {
             }
         });
         */
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(SeriesActivity.this, prenoms[position], Toast.LENGTH_SHORT).show();
+                //TODO : Transmettre la valeur de l'item sélectionné à l'activité de la série ciblée
+                Intent intent = new Intent(SeriesActivity.this, SerieActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
