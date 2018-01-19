@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">The TVBD</string>
 
+    <!-- MENU -->
+    <string name="menu_last_series">Last series</string>
+    <string name="menu_search">Search a serie</string>
+    <string name="menu_account">My account</string>
+    <string name="menu_logout">Logout</string>
+
     <!-- ACCOUNT -->
     <string name="login">Login :</string>
     <string name="pwd">Password :</string>

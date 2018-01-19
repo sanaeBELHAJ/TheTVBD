@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">The TVBD</string>
 
+    <!-- MENU -->
+    <string name="menu_last_series">Dernières séries</string>
+    <string name="menu_search">Rechercher une série</string>
+    <string name="menu_account">Mon compte</string>
+    <string name="menu_logout">Déconnexion</string>
+
     <!-- ACCOUNT -->
     <string name="login">Pseudo :</string>
     <string name="pwd">Mot de passe :</string>
