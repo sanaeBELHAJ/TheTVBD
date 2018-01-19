@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     private final static int ACTIVITY_CALL_ID = 1001;
 
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    /*public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.menu_home:
                 Toast.makeText(this,"Home menu selected",Toast.LENGTH_LONG).show();
@@ -62,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
     private void homeSeries(){
         Intent intent = new Intent(
-                MainActivity.this,
-                seriesActivity.class
+                SearchActivity.this,
+                SeriesActivity.class
         );
         startActivity(intent);
     }

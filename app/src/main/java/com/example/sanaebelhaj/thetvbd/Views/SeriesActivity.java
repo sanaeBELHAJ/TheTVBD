@@ -19,7 +19,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class seriesActivity extends AppCompatActivity {
+public class SeriesActivity extends AppCompatActivity {
 
     private ListView listView;
 
@@ -44,12 +44,12 @@ public class seriesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<TheTVDBRepo>> call, Response<List<TheTVDBRepo>> response) {
                 List<TheTVDBRepo> repos = response.body();
-                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(seriesActivity.this,repos));
+                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(SeriesActivity.this,repos));
             }
 
             @Override
             public void onFailure(Call<List<TheTVDBRepo>> call, Throwable t) {
-                Toast.makeText(seriesActivity.this, "error :(",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesActivity.this, "error :(",Toast.LENGTH_SHORT).show();
             }
         });
     }
