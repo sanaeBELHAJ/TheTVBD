@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         public void onClick(View v){
             Log.i("DEBUG","Bouton cliqué");
-            Intent series = new Intent(v.getContext(), LoginActivity.class);
+            Intent series = new Intent(v.getContext(), SeriesActivity.class);
             startActivity(series);
         }
     };

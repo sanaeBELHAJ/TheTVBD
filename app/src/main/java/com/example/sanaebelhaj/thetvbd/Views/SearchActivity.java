@@ -32,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
         btnSearch   = (Button) findViewById(R.id.btnSearch);
         textViewLog = (TextView) findViewById(R.id.textViewLog);
 
-        btnSearch.setOnClickListener(btnListenerSearch);
+        //btnSearch.setOnClickListener(btnListenerSearch);
 
         init();
     }
