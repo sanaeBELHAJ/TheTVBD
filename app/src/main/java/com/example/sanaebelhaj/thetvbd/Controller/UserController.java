@@ -2,6 +2,7 @@ package com.example.sanaebelhaj.thetvbd.Controller;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sanaebelhaj.thetvbd.Models.User;
@@ -35,6 +36,11 @@ public class UserController  extends UserDB{
         db.close();
 
         return createSuccessful;
+    }
+    public Cursor getUserById(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from user where id", new String[] { String.valueOf(id) });
+        return res;
     }
 
 }

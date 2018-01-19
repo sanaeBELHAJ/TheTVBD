@@ -3,7 +3,7 @@ package com.example.sanaebelhaj.thetvbd;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class inscription extends AppCompatActivity {
+public class login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
