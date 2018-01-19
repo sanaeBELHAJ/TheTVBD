@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.SeriesActivity"/>
-        <!-- <activity android:name=".Views.SearchActivity"/> -->
+        <activity android:name=".Views.SearchActivity"/>
+        <activity android:name=".Views.SerieActivity"/>
+        <activity android:name=".Views.AccountActivity"/>
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SeriesActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity {
 
     private ListView listView;
 
@@ -40,11 +40,6 @@ public class SeriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
 
-        listView = findViewById(R.id.list_series);
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SeriesActivity.this,
-                android.R.layout.simple_list_item_1, prenoms);
-        listView.setAdapter(adapter);
 
         /*Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://api.thetvdb.com/")
@@ -81,19 +76,19 @@ public class SeriesActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(SeriesActivity.this, SeriesActivity.class);
+                intent = new Intent(AccountActivity.this, SeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:
-                intent = new Intent(SeriesActivity.this, SearchActivity.class);
+                intent = new Intent(AccountActivity.this, SearchActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_account:
-                intent = new Intent(SeriesActivity.this, AccountActivity.class);
+                intent = new Intent(AccountActivity.this, AccountActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_logout:
-                intent = new Intent(SeriesActivity.this, LoginActivity.class);
+                intent = new Intent(AccountActivity.this, LoginActivity.class);
                 startActivity(intent);
                 return true;
             default:

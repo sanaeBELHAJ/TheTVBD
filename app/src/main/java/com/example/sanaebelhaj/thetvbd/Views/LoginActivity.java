@@ -34,6 +34,9 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         public void onClick(View v){
             Log.i("DEBUG","Bouton cliqué");
+
+            //TODO : Contrôle de login via API
+
             Intent series = new Intent(v.getContext(), SeriesActivity.class);
             startActivity(series);
         }

@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sanaebelhaj.thetvbd.R;
+
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -26,47 +28,20 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
 
-        searchText  = (EditText) findViewById(R.id.searchText);
-        btnSearch   = (Button) findViewById(R.id.btnSearch);
-        textViewLog = (TextView) findViewById(R.id.textViewLog);
+        searchText  = findViewById(R.id.searchText);
+        btnSearch   = findViewById(R.id.btnSearch);
+        textViewLog = findViewById(R.id.textViewLog);
 
         //btnSearch.setOnClickListener(btnListenerSearch);
 
-        init();
+        //init();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
-
         getMenuInflater().inflate(R.menu.main_menu,menu);
         return true;
-    }
-
-    /*public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.menu_home:
-                Toast.makeText(this,"Home menu selected",Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_series:
-                homeSeries();
-                return true;
-            case R.id.menu_settings:
-                Toast.makeText(this,"Settings menu selected",Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_help:
-                Toast.makeText(this,"Help menu selected",Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
-    private void homeSeries(){
-        Intent intent = new Intent(
-                SearchActivity.this,
-                SeriesActivity.class
-        );
-        startActivity(intent);
     }
 
     private void init(){
@@ -91,5 +66,27 @@ public class SearchActivity extends AppCompatActivity {
         }
     };
 
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.menu_last_series:
+                intent = new Intent(SearchActivity.this, SeriesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_search:
+                intent = new Intent(SearchActivity.this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_account:
+                intent = new Intent(SearchActivity.this, AccountActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_logout:
+                intent = new Intent(SearchActivity.this, LoginActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
