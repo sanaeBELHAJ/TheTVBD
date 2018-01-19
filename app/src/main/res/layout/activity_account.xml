@@ -15,9 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:text="@string/account_header"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
     <TextView
         android:id="@+id/pseudoText"
@@ -31,7 +29,7 @@
         android:layout_marginTop="64dp"
         android:text="@string/login" />
 
-    <EditText
+    <TextView
         android:id="@+id/pseudoInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +50,7 @@
         android:layout_marginTop="64dp"
         android:text="@string/email" />
 
-    <EditText
+    <TextView
         android:id="@+id/emailInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,22 +82,8 @@
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
-    <!-- JAVA pour AccountActivity :
-
-    //get the spinner from the xml.
-    Spinner dropdown = findViewById(R.id.spinner1);
-    //create a list of items for the spinner.
-    String[] items = new String[]{"1", "2", "three"};
-    //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-    //There are multiple variations of this, but this is the basic variant.
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-    //set the spinners adapter to the previously created one.
-    dropdown.setAdapter(adapter);
-
-    -->
-
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/languageText"
