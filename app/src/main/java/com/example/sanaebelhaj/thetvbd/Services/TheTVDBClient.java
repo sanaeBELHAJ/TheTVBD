@@ -26,28 +26,21 @@ public interface TheTVDBClient {
      *  Authentication
      *  Obtaining and refreshing your JWT token
     */
-
     // Returns a session token
     @POST("/login")
     Call <TheTVDBToken> login(@Body TheTVDBLogin login);
 
     // Refresh Token
     @GET("/refresh_token")
-    Call <TheTVDBToken> refresh_token(@Body TheTVDBToken token);
+    Call <TheTVDBToken> refresh_token(@Header("Authorization") String token);
 
     /**
      *  Episodes
      *  Information about a specific episode
      */
-
     // Information about a specific episode
     @GET("/episodes/{id}")
-    Call <ResponseBody> episodeInfo(@Path(value = "id") int idEpisode);
-
-    /**
-     *  Languages
-     *  Available languages and information
-     */
+    Call <ResponseBody> episodeInfo(@Header("Authorization") String token,@Path(value = "id") int idEpisode);
 
     /**
      *  Search
@@ -60,17 +53,21 @@ public interface TheTVDBClient {
      *  Series
      *  Information about a specific series
      */
+    @GET("/series/{id}")
+    Call <ResponseBody> seriesInfo(@Header("Authorization") String token, @Path(value = "id") int idSerie);
 
     /**
      *  Updates
      *  Series that have been recently updated.
+     *  Warning : Timestamp less than a week
      */
+    @GET("/updated/query")
+    Call <ResponseBody> updateSeries(@Header("Authorization") String token, @Query("fromTime") int timestamp);
 
     /**
      *  Users
      *  Routes for handling user data.
      */
-
     // Returns basic information about the currently authenticated user.
     @GET("/user")
     Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
