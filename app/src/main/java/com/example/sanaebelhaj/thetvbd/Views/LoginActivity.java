@@ -23,8 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity{
 
-    private EditText pseudoInput;
-    private EditText passwordInput;
+    private EditText apikey;
+    private EditText userkey;
+    private EditText username;
     private Button login;
 
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
@@ -41,30 +42,35 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        pseudoInput = findViewById(R.id.pseudoInput);
-        passwordInput = findViewById(R.id.passwordInput);
-
         login = findViewById(R.id.login);
-
         login.setOnClickListener(btnListenerLogin);
     }
 
     private static String token;
 
-    private void login(){
-        TheTVDBLogin login = new TheTVDBLogin("398D024B39FD5AEE","7367A4BB383FE4A0","Sabertooth28");
+
+    private View.OnClickListener btnListenerLogin = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+        apikey = (EditText) findViewById(R.id.apikeyInput);
+        userkey = (EditText) findViewById(R.id.userkeyInput);
+        username = (EditText) findViewById(R.id.usernameInput);
+
+        TheTVDBLogin login = new TheTVDBLogin(apikey.getText().toString(),userkey.getText().toString(),username.getText().toString());
         Call<TheTVDBToken> call = userClient.login(login);
 
         call.enqueue(new Callback<TheTVDBToken>() {
             @Override
             public void onResponse(Call<TheTVDBToken> call, Response<TheTVDBToken> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(LoginActivity.this,response.body().getToken(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(LoginActivity.this,response.body().getToken(),Toast.LENGTH_LONG).show();
                     token = response.body().getToken();
                     Log.i("LOGIN","Token => " + response.body().getToken());
+                    Intent series = new Intent(LoginActivity.this, SeriesActivity.class);
+                    startActivity(series);
                 }
                 else{
-                    Toast.makeText(LoginActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Error :(",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -73,18 +79,6 @@ public class LoginActivity extends AppCompatActivity{
                 Toast.makeText(LoginActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private View.OnClickListener btnListenerLogin = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-
-            Log.i("DEBUG","Bouton cliqué");
-
-            //TODO : Contrôle de login via API
-            Intent series = new Intent(v.getContext(), SeriesActivity.class);
-            startActivity(series);
-            //login();
         }
     };
 }

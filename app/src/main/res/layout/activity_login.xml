@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/pseudoText"
+        android:id="@+id/apikeyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,48 +17,73 @@
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
-        android:text="@string/login" />
+        android:text="@string/apikey" />
 
     <EditText
-        android:id="@+id/pseudoInput"
+        android:id="@+id/apikeyInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/pseudoText"
-        android:layout_alignBottom="@+id/pseudoText"
-        android:layout_toEndOf="@+id/pseudoText"
-        android:layout_toRightOf="@+id/pseudoText"
+        android:layout_alignBaseline="@+id/apikeyText"
+        android:layout_alignBottom="@+id/apikeyText"
+        android:layout_toEndOf="@+id/apikeyText"
+        android:layout_toRightOf="@+id/apikeyText"
         android:ems="10"
+        android:text="398D024B39FD5AEE"
         android:inputType="textPersonName" />
 
 
 
     <TextView
-        android:id="@+id/passwordText"
+        android:id="@+id/userkeytext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pseudoText"
-        android:layout_alignStart="@+id/pseudoText"
-        android:layout_below="@+id/pseudoText"
+        android:layout_alignLeft="@+id/apikeyText"
+        android:layout_alignStart="@+id/apikeyText"
+        android:layout_below="@+id/apikeyText"
         android:layout_marginTop="64dp"
-        android:text="@string/pwd" />
+        android:text="@string/userkey" />
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/userkeyInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/passwordText"
-        android:layout_alignBottom="@+id/passwordText"
-        android:layout_alignLeft="@+id/pseudoInput"
-        android:layout_alignStart="@+id/pseudoInput"
+        android:layout_alignBaseline="@+id/userkeytext"
+        android:layout_alignBottom="@+id/userkeytext"
+        android:layout_alignLeft="@+id/userkeytext"
+        android:layout_alignStart="@+id/apikeyInput"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:text="7367A4BB383FE4A0"
+        android:inputType="textPersonName" />
+
+
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userkeytext"
+        android:layout_alignStart="@+id/userkeytext"
+        android:layout_below="@+id/userkeytext"
+        android:layout_marginTop="64dp"
+        android:text="@string/username" />
+
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/usernameText"
+        android:layout_alignBottom="@+id/usernameText"
+        android:layout_alignLeft="@+id/userkeyInput"
+        android:layout_alignStart="@+id/userkeyInput"
+        android:ems="10"
+        android:text="Sabertooth28"
+        android:inputType="textPersonName" />
 
 
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordInput"
+        android:layout_below="@+id/usernameInput"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/submit" />
