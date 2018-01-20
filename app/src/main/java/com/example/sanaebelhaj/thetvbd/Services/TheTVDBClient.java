@@ -3,6 +3,7 @@ package com.example.sanaebelhaj.thetvbd.Services;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBSearch;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
+import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 
 import java.util.List;
 
@@ -73,5 +74,5 @@ public interface TheTVDBClient {
 
     // Returns basic information about the currently authenticated user.
     @GET("/user")
-    Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
+    Call<TheTVDBUser> getUserInfo(@Header("Authorization") String token);
 }

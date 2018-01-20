@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
+import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
@@ -64,7 +65,8 @@ public class AccountActivity extends AppCompatActivity {
                     token = response.body().getToken();
                     Log.i("LOGIN","Token => " + token);
 
-                    Call<ResponseBody> callUser = userClient.getUserInfo(token);
+                    Call<TheTVDBUser> callUser = userClient.getUserInfo(token);
+                    Log.i("LOGIN","Token => " + callUser);
                     getUserInfos(callUser);
                 }
                 else{
@@ -78,28 +80,29 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
-    public void getUserInfos(Call<ResponseBody> call){
-        call.enqueue(new Callback<ResponseBody>() {
+    public void getUserInfos(Call<TheTVDBUser> call){
+        call.enqueue(new Callback<TheTVDBUser>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<TheTVDBUser> call, Response<TheTVDBUser> response) {
                 if(response.isSuccessful()){
-                    infos = response.body();
+                    infos = response.body().getData();
                     Log.i("LOGIN","Infos de l'utilisateur => " + infos);
                 }
                 else{
+                    Log.i("LOGIN","Not Success " + response);
                     Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<TheTVDBUser> call, Throwable t) {
                 Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     //Change language
-    public void sendFeedback(View v){
+    public void changeLanguage(View v){
         final Spinner feedbackSpinner = (Spinner) findViewById(R.id.list_languages);
         String language = feedbackSpinner.getSelectedItem().toString();
 
