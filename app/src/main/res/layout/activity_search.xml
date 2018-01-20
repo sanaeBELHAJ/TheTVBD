@@ -31,8 +31,8 @@
             android:layout_toLeftOf="@+id/btnSearch"
             android:layout_toStartOf="@+id/btnSearch"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/search_title" />
+            android:hint="@string/search_title"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -45,7 +45,7 @@
 
         <TextView
             android:id="@+id/textViewLog"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
@@ -53,7 +53,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/searchText"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="18dp"
+            android:text="TextView" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

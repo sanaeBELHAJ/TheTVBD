@@ -9,14 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
+import com.example.sanaebelhaj.thetvbd.Views.Adapter.TheTVDBRepoAdapter;
+
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchActivity extends AppCompatActivity {
 
-    private final static int ACTIVITY_CALL_ID = 1001;
+    private final String THETVDB_URL_API = "https://api.thetvdb.com";
 
     private EditText searchText;
     private Button btnSearch;
@@ -24,6 +37,13 @@ public class SearchActivity extends AppCompatActivity {
 
     private String searchedValue;
     private String result;
+
+    Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl(THETVDB_URL_API)
+            .addConverterFactory(GsonConverterFactory.create());
+
+    Retrofit retrofit = builder.build();
+    TheTVDBClient userClient = retrofit.create(TheTVDBClient.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +54,32 @@ public class SearchActivity extends AppCompatActivity {
         btnSearch   = findViewById(R.id.btnSearch);
         textViewLog = findViewById(R.id.textViewLog);
 
-        //btnSearch.setOnClickListener(btnListenerSearch);
+        btnSearch.setOnClickListener(btnListenerSearch);
 
         //init();
+    }
+
+    private void searchSeries(){
+
+        Call<ResponseBody> call = userClient.search("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY0ODg5MjEsImlkIjoiRVNHSV9BbmRyb2lkX3Byb2plY3QiLCJvcmlnX2lhdCI6MTUxNjQwMjUyMSwidXNlcmlkIjo0OTY2MzYsInVzZXJuYW1lIjoiU2FiZXJ0b290aDI4In0.tdI6Z8BDjyHRxUWQBsC9Q2G1yaFloVHjXMuKSEYQwuWtcTCVbsSTy6s_JAtR8q1QwffiXT5bs1WEfwMS8i3WAIPZJj_kSaqvB_trmxaa8aZ3dSj7rdTTDTqI5E_e-6QhOojMrAkzKmDp4UocyvsrpOccIJBpJo9NzY_xJj490LsPxYI-tAIVr366yCkni2HAobPKt7119aXwtkhRc2RmshdVcIQO8lYq3y3QumM2OwRKO2JLQ0G3jwQMwqjLMS_QS0ETE40x-UtCmrgLCFYmkLP_ubTsshMb7Ruz4cxLFsVIBFru2qOG9xkbOHqBQvjD36vCyDo6-XbX76qVU17bgA",searchText.getText().toString());
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(SearchActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(SearchActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SearchActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -55,14 +98,12 @@ public class SearchActivity extends AppCompatActivity {
     private View.OnClickListener btnListenerSearch = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            Log.i("DEBUG","Bouton cliqué");
 
             String valueSearch = searchText.getText().toString();
-
             Log.i("SEARCH_TEXT",valueSearch);
-
             if(valueSearch.equals("")) return;
 
+            searchSeries();
         }
     };
 
