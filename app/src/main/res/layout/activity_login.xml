@@ -58,9 +58,9 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/passwordText"
-        android:layout_alignRight="@+id/passwordText"
-        android:layout_below="@+id/passwordText"
+        android:layout_below="@+id/passwordInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:text="@string/submit" />
 
 </RelativeLayout>
