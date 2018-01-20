@@ -11,17 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.LoginActivity">
+        <activity android:name=".Views.LoginActivity" android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.SeriesActivity"/>
-        <activity android:name=".Views.SearchActivity"/>
-        <activity android:name=".Views.SerieActivity"/>
-        <activity android:name=".Views.AccountActivity"/>
+        <activity android:name=".Views.SeriesActivity" android:configChanges="locale"/>
+        <activity android:name=".Views.SearchActivity" android:configChanges="locale"/>
+        <activity android:name=".Views.SerieActivity" android:configChanges="locale"/>
+        <activity android:name=".Views.AccountActivity" android:configChanges="locale"/>
     </application>
 
 
