@@ -24,4 +24,5 @@
         <activity android:name=".Views.AccountActivity"/>
     </application>
 
+
 </manifest>
