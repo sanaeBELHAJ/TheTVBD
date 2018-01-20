@@ -7,12 +7,12 @@ import okhttp3.ResponseBody;
  */
 
 public class TheTVDBUser {
-    private ResponseBody data;
+    private String data;
 
-    public ResponseBody getData() {
+    public String getData() {
         return data;
     }
-    public void setData(ResponseBody data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

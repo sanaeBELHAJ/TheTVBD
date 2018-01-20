@@ -17,6 +17,7 @@ import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
+import com.google.gson.Gson;
 
 import java.util.Locale;
 
@@ -37,17 +38,17 @@ public class AccountActivity extends AppCompatActivity {
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
 
+
     Retrofit retrofit = builder.build();
     TheTVDBClient userClient = retrofit.create(TheTVDBClient.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        TheTVDBLogin login = new TheTVDBLogin("398D024B39FD5AEE","7367A4BB383FE4A0","Sabertooth28");
-        Call<TheTVDBToken> callLogin = userClient.login(login);
-        getToken(callLogin);
+        getUserInfos();
 
         //List languages
         Spinner dropdown = findViewById(R.id.list_languages);
@@ -56,41 +57,19 @@ public class AccountActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
     }
 
-
-    public void getToken(Call<TheTVDBToken> call){
-        call.enqueue(new Callback<TheTVDBToken>() {
-            @Override
-            public void onResponse(Call<TheTVDBToken> call, Response<TheTVDBToken> response) {
-                if(response.isSuccessful()){
-                    token = response.body().getToken();
-                    Log.i("LOGIN","Token => " + token);
-
-                    Call<TheTVDBUser> callUser = userClient.getUserInfo(token);
-                    Log.i("LOGIN","Token => " + callUser);
-                    getUserInfos(callUser);
-                }
-                else{
-                    Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<TheTVDBToken> call, Throwable t) {
-                Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void getUserInfos(Call<TheTVDBUser> call){
+    public void getUserInfos(){
+        Call<TheTVDBUser> call = userClient.getUserInfo("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY1NjU3NDEsImlkIjoiRVNHSV9BbmRyb2lkX3Byb2plY3QiLCJvcmlnX2lhdCI6MTUxNjQ3OTM0MSwidXNlcmlkIjo0OTY2MzYsInVzZXJuYW1lIjoiU2FiZXJ0b290aDI4In0.br6ZVQy6c-bPg1n9CK2gWT-dQcYEErCGo_e9flPm0CAP43RSwwFrpeUhNKCiuQ9Y-N4DvOiy67w09KQifagipWMVRq4IhIscaKUNdFDZ2bJfk5ibrFQOWeF86ceDYnGb7zirqLX_dtU8xofr-yVQyXX-tG7k1rHvR-pdJpOErcLVpWcYZ2yCG-g5Qhmi7siUvPvcWX5A8WSTwIHN3U3b2OZqRb9IVEv20P4e3dCAH87ygQU7p213BywKrEduNjJWwrHNYFrhC4zivvFGcLdRdHjAUl5WWoLJeoZWZvxHCcItEJaZA0HH_np6pj5s9UveRyRhflJlMS4GYZR3xiZyOg");
         call.enqueue(new Callback<TheTVDBUser>() {
             @Override
             public void onResponse(Call<TheTVDBUser> call, Response<TheTVDBUser> response) {
+
                 if(response.isSuccessful()){
-                    infos = response.body().getData();
-                    Log.i("LOGIN","Infos de l'utilisateur => " + infos);
+                    System.out.print(response.body());
+                    Log.i("BODY", response.body().getData());
+                    Toast.makeText(AccountActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Log.i("LOGIN","Not Success " + response);
-                    Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AccountActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
                 }
             }
 
