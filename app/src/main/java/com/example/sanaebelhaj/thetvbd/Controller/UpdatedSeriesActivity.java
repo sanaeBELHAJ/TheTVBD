@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -55,8 +56,10 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
     }
 
     public void getSeries(){
-        //1514805943
-        Call<ResponseBody> call = userClient.getUpdated("Bearer "+session.getToken(), "1516532449");
+        //Last 1 hours
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Long time = (timestamp.getTime()/1000)-(1*60*60);
+        Call<ResponseBody> call = userClient.getUpdated("Bearer "+session.getToken(), time.toString());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

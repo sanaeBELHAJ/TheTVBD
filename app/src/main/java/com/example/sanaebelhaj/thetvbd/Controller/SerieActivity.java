@@ -59,6 +59,8 @@ public class SerieActivity extends AppCompatActivity {
         Log.i("BUILD", session.getToken());
         buttonAdd = (Button)findViewById(R.id.favoriteAdd);
         buttonRmv = (Button)findViewById(R.id.favoriteRmv);
+        buttonAdd.setVisibility(View.GONE);
+        buttonRmv.setVisibility(View.GONE);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             name = extras.getString(UpdatedSeriesActivity.NameSerie);
@@ -85,8 +87,6 @@ public class SerieActivity extends AppCompatActivity {
                                     break;
                                 }
                                 getSerieInfos();
-                                buttonAdd.setVisibility(View.GONE);
-                                buttonRmv.setVisibility(View.GONE);
                                 getFavoriteSerie();
                                 getActors();
                                 getUserMark();
