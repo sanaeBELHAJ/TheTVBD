@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.Helper;
 import com.example.sanaebelhaj.thetvbd.Services.Session;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
@@ -37,6 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SerieActivity extends AppCompatActivity {
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private String id;
+    private String name;
     private Session session;
     private ListView listView;
     private Button buttonAdd;
@@ -59,14 +61,53 @@ public class SerieActivity extends AppCompatActivity {
         buttonRmv = (Button)findViewById(R.id.favoriteRmv);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            id = extras.getString(UpdatedSeriesActivity.IDSerie);
-            getSerieInfos();
-            buttonAdd.setVisibility(View.GONE);
-            buttonRmv.setVisibility(View.GONE);
-            getFavoriteSerie();
-            getActors();
-            getUserMark();
+            name = extras.getString(UpdatedSeriesActivity.NameSerie);
+            searchSerie(name);
         }
+    }
+
+    public void searchSerie(String name){
+        Call<ResponseBody> call = userClient.searchSerie("Bearer "+session.getToken(), name);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
+
+                            if (data != null) {
+                                for (int i=0;i<data.length();i++) {
+                                    JSONObject serie = data.getJSONObject(i);
+                                    id = serie.getString("id");
+                                    break;
+                                }
+                                getSerieInfos();
+                                buttonAdd.setVisibility(View.GONE);
+                                buttonRmv.setVisibility(View.GONE);
+                                getFavoriteSerie();
+                                getActors();
+                                getUserMark();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void getSerieInfos(){
@@ -127,6 +168,7 @@ public class SerieActivity extends AppCompatActivity {
                                 listView = findViewById(R.id.list_actors);
                                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SerieActivity.this, android.R.layout.simple_list_item_1, actors);
                                 listView.setAdapter(adapter);
+                                Helper.getListViewSize(listView);
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                                 {
                                     @Override

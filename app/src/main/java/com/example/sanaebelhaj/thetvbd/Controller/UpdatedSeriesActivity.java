@@ -38,7 +38,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
     private ListView listView;
     private final ArrayList<String> list = new ArrayList<String>();
     private Session session;
-    public static String IDSerie;
+    public static String NameSerie;
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
@@ -72,8 +72,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
                                 for (int i=0;i<data.length();i++) {
                                     JSONObject serie = data.getJSONObject(i);
                                     String idSerie = serie.getString("id");
-                                    list.add(idSerie);
-                                    //getInfos(idSerie);
+                                    getInfos(idSerie);
                                 }
                                 listView = findViewById(R.id.list_series);
                                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdatedSeriesActivity.this, android.R.layout.simple_list_item_1, list);
@@ -83,7 +82,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Intent intent = new Intent(UpdatedSeriesActivity.this, SerieActivity.class);
-                                    intent.putExtra(IDSerie, list.get(position));
+                                    intent.putExtra(NameSerie, list.get(position));
                                     startActivity(intent);
                                     }
                                 });
@@ -125,6 +124,9 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
                             if(nom != null && !nom.equals("null")){
                                 list.add(nom);
                                 Log.i("Nom", nom);
+                                listView = findViewById(R.id.list_series);
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdatedSeriesActivity.this, android.R.layout.simple_list_item_1, list);
+                                listView.setAdapter(adapter);
                             }
                         }
                         catch (JSONException e) {
