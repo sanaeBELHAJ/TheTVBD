@@ -6,20 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.example.sanaebelhaj.thetvbd.Controller.UpdatedSeriesActivity">
 
-    <TextView
-        android:id="@+id/series_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/series_header"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/series_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/series_header"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:layout_editor_absoluteX="118dp"
+            tools:layout_editor_absoluteY="0dp"
+            />
 
         <ListView
             android:id="@+id/list_series"
@@ -27,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"/>
 
     </RelativeLayout>
 

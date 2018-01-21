@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:text="@string/account_header"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
@@ -23,13 +23,14 @@
         android:id="@+id/pseudoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:text="@string/username" />
+        android:layout_below="@+id/accountHeader"
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginTop="32dp"
+        android:layout_toLeftOf="@+id/accountHeader"
+        android:layout_toStartOf="@+id/accountHeader"
+        android:text="@string/username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/pseudoInput"
@@ -37,8 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/pseudoText"
         android:layout_alignBottom="@+id/pseudoText"
-        android:layout_toEndOf="@+id/pseudoText"
-        android:layout_toRightOf="@+id/pseudoText"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -49,16 +49,20 @@
         android:layout_alignLeft="@+id/pseudoText"
         android:layout_alignStart="@+id/pseudoText"
         android:layout_below="@+id/pseudoText"
-        android:layout_marginTop="64dp"
-        android:text="@string/language_select" />
+        android:layout_marginTop="32dp"
+        android:text="@string/language_select"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <Spinner
         android:id="@+id/list_languages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/languageText"
+        android:layout_alignLeft="@+id/pseudoInput"
+        android:layout_alignStart="@+id/pseudoInput"
         android:layout_below="@+id/languageText"
-        android:layout_marginTop="64dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="32dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
 
@@ -66,10 +70,9 @@
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/languageText"
-        android:layout_alignStart="@+id/languageText"
         android:layout_below="@+id/list_languages"
-        android:layout_marginTop="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:background="@android:color/holo_green_light"
         android:onClick="changeLanguage"
         android:text="@string/submit" />

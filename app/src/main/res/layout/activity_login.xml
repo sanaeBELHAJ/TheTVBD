@@ -23,13 +23,18 @@
         android:id="@+id/apikeyInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/userkeyInput"
         android:layout_alignBaseline="@+id/apikeyText"
         android:layout_alignBottom="@+id/apikeyText"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
         android:layout_toEndOf="@+id/apikeyText"
         android:layout_toRightOf="@+id/apikeyText"
         android:ems="10"
-        android:text="398D024B39FD5AEE"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="398D024B39FD5AEE" />
 
 
 
@@ -85,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameInput"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:background="@android:color/holo_green_light"
         android:text="@string/submit" />
 
