@@ -11,9 +11,11 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -84,4 +86,12 @@ public interface TheTVDBClient {
     // Returns list of the favorites series for the user
     @GET("/user/favorites")
     Call<ResponseBody> getFavorites(@Header("Authorization") String token);
+
+    // Add a serie to the favorite list
+    @PUT("/user/favorites/{id}")
+    Call<ResponseBody> addFavorite(@Header("Authorization") String token, @Path(value = "id") String id);
+
+    // Remove a serie to the favorite list
+    @DELETE("/user/favorites/{id}")
+    Call<ResponseBody> rmvFavorite(@Header("Authorization") String token, @Path(value = "id") String id);
 }

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.sanaebelhaj.thetvbd.Controller.SerieActivity">
 
+    <TextView
+        android:id="@+id/nameTVDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:id="@+id/markTVDB"
@@ -23,10 +33,10 @@
         android:id="@+id/markTVDBText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/pseudoText"
-        android:layout_alignBottom="@+id/pseudoText"
-        android:layout_toEndOf="@+id/pseudoText"
-        android:layout_toRightOf="@+id/pseudoText"
+        android:layout_alignBaseline="@+id/markTVDB"
+        android:layout_alignBottom="@+id/markTVDB"
+        android:layout_toEndOf="@+id/markTVDB"
+        android:layout_toRightOf="@+id/markTVDB"
         android:ems="10"/>
 
 
@@ -47,8 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/markUser"
         android:layout_alignBottom="@+id/markUser"
-        android:layout_alignLeft="@+id/markUser"
-        android:layout_alignStart="@+id/markUser"
+        android:layout_alignLeft="@+id/markTVDBText"
+        android:layout_alignStart="@+id/markTVDBText"
         android:ems="10" />
 
 
@@ -99,7 +109,17 @@
         android:layout_alignEnd="@+id/actors"
         android:layout_alignRight="@+id/actors"
         android:layout_below="@+id/actors"
+        android:onClick="putFavoriteSerie"
         android:text="@string/serie_favorite_add" />
-    <!-- @string/serie_favorite_remove -->
+
+    <Button
+        android:id="@+id/favoriteRmv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/favoriteAdd"
+        android:layout_alignRight="@+id/favoriteAdd"
+        android:layout_below="@+id/favoriteAdd"
+        android:onClick="removeFavoriteSerie"
+        android:text="@string/serie_favorite_remove" />
 
 </RelativeLayout>

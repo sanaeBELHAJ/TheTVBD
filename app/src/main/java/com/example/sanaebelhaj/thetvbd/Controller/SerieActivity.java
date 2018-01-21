@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -31,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SerieActivity extends AppCompatActivity {
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
+    private String id;
     private Session session;
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
@@ -46,11 +49,14 @@ public class SerieActivity extends AppCompatActivity {
         Log.i("BUILD", session.getToken());
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null)
-            getSerie(extras.getString(SeriesActivity.IDSerie));
+        if (extras != null) {
+            id = extras.getString(SeriesActivity.IDSerie);
+            getSerieInfos();
+            getFavoriteSerie();
+        }
     }
 
-    public void getSerie(String id){
+    public void getSerieInfos(){
         Call<ResponseBody> call = userClient.getInfos("Bearer "+session.getToken(), id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -60,10 +66,109 @@ public class SerieActivity extends AppCompatActivity {
                     try {
                         String string = response.body().string();
                         Log.i("BODY", string);
+                        try {
+                            JSONObject data = new JSONObject(string).getJSONObject("data");
+
+                            TextView name = (TextView) findViewById(R.id.nameTVDB);
+                            name.setText(data.getString("seriesName"));
+
+                            TextView mark = (TextView) findViewById(R.id.markTVDBText);
+                            mark.setText(data.getString("siteRating")+"/10");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     Toast.makeText(SerieActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getFavoriteSerie(){
+        Call<ResponseBody> call = userClient.getFavorites("Bearer "+session.getToken());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        Log.i("BODY", string);
+                        try {
+                            JSONObject data = new JSONObject(string).getJSONObject("data");
+                            JSONArray jsonArray = data.getJSONArray("favorites");
+
+                            final ArrayList<String> list = new ArrayList<String>();
+                            if (jsonArray != null) {
+                                int len = jsonArray.length();
+                                for (int i=0;i<len;i++)
+                                    list.add(jsonArray.get(i).toString());
+
+                                if(Arrays.asList(list).contains(id)){
+                                    //remove
+                                }
+                                else{
+                                    //put
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(SerieActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void putFavoriteSerie(View v){
+        Call<ResponseBody> call = userClient.addFavorite("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(SerieActivity.this,"Done",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void removeFavoriteSerie(View v){
+        Call<ResponseBody> call = userClient.rmvFavorite("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(SerieActivity.this,"Done",Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();

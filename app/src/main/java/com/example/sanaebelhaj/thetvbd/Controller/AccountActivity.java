@@ -49,13 +49,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         session = new Session(getApplicationContext());
-        Log.i("BUILD", session.getToken());
-
         getUserInfos();
-        //String language = "fr";
-        //String favoritesDisplaymode = "banners";
-
-
 
         //List languages
         Spinner dropdown = findViewById(R.id.list_languages);
@@ -73,7 +67,7 @@ public class AccountActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try {
                         String string = response.body().string();
-                        //Log.i("BODY", string);
+                        Log.i("BODY", string);
                         try {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
                             TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
