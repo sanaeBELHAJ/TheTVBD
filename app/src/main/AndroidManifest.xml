@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.SeriesActivity" android:configChanges="locale"/>
+        <activity android:name=".Controller.UpdatedSeriesActivity" android:configChanges="locale"/>
         <activity android:name=".Controller.SearchActivity" android:configChanges="locale"/>
         <activity android:name=".Controller.SerieActivity" android:configChanges="locale"/>
         <activity android:name=".Controller.AccountActivity" android:configChanges="locale"/>

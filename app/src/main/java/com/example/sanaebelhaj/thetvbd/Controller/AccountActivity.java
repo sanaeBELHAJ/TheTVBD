@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.Session;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
@@ -78,7 +77,6 @@ public class AccountActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(AccountActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(AccountActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
@@ -130,7 +128,7 @@ public class AccountActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(AccountActivity.this, SeriesActivity.class);
+                intent = new Intent(AccountActivity.this, UpdatedSeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:

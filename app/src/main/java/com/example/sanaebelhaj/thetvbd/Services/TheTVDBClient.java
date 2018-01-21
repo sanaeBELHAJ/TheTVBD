@@ -1,13 +1,8 @@
 package com.example.sanaebelhaj.thetvbd.Services;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBSearch;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 
-import java.util.List;
-
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -68,10 +63,19 @@ public interface TheTVDBClient {
     @GET("/series/{id}")
     Call<ResponseBody> getInfos(@Header("Authorization") String token, @Path(value = "id") String id);
 
+    // Returns actors about a serie
+    @GET("/series/{id}/actors")
+    Call<ResponseBody> getActors(@Header("Authorization") String token, @Path(value = "id") String id);
+
     /**
      *  Updates
      *  Series that have been recently updated.
      */
+
+    // Returns information about the serie
+    @GET("/updated/query")
+    Call<ResponseBody> getUpdated(@Header("Authorization") String token, @Query("fromTime") String fromTime);
+
 
     /**
      *  Users
@@ -82,6 +86,13 @@ public interface TheTVDBClient {
     @GET("/user")
     Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
 
+    // Get the user rating list
+    @GET("/user/ratings")
+    Call<ResponseBody> getRatings(@Header("Authorization") String token);
+
+    // Set a mark for a serie by the user
+    @PUT("/user/ratings/{itemType}/{itemId}/{itemRating}")
+    Call<ResponseBody> setRatings(@Header("Authorization") String token,@Path(value = "itemType") String itemType, @Path(value = "itemId") String itemId, @Path(value = "itemRating") String itemRating);
 
     // Returns list of the favorites series for the user
     @GET("/user/favorites")

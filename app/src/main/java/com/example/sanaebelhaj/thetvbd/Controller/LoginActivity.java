@@ -68,11 +68,10 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<TheTVDBToken> call, Response<TheTVDBToken> response) {
                 if(response.isSuccessful()){
-                    //Toast.makeText(LoginActivity.this,response.body().getToken(),Toast.LENGTH_LONG).show();
                     token = response.body().getToken();
                     Log.i("LOGIN","Token => " + response.body().getToken());
                     session.setToken(token);
-                    Intent series = new Intent(LoginActivity.this, SeriesActivity.class);
+                    Intent series = new Intent(LoginActivity.this, UpdatedSeriesActivity.class);
                     startActivity(series);
                 }
                 else{

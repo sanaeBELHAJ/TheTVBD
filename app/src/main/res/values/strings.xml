@@ -33,5 +33,5 @@
     <string name="serie_favorite_add">Add as a favorite serie</string>
     <string name="serie_favorite_remove">Remove the favorite serie</string>
     <string name="serie_share">Share the serie</string>
-    <string name="serie_actor">Access to the webpage of the actor</string>
+    <string name="serie_actor">Actors list</string>
 </resources>

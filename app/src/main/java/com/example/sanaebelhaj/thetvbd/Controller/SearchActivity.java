@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(SearchActivity.this, SeriesActivity.class);
+                intent = new Intent(SearchActivity.this, UpdatedSeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:
