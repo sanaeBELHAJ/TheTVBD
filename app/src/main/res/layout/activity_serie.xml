@@ -69,7 +69,9 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="64dp"
-                    android:text="@string/serie_mark_user" />
+                    android:text="@string/serie_mark_user"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
 
                 <EditText
                     android:id="@+id/markUserText"
