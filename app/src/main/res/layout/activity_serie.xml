@@ -82,7 +82,7 @@
                 android:layout_alignLeft="@+id/markUserText"
                 android:layout_alignStart="@+id/markUserText"
                 android:layout_below="@+id/markUserText"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@android:color/holo_green_light"
                 android:onClick="sendMark"
                 android:text="@string/submit" />
 
@@ -116,25 +116,27 @@
                     android:layout_marginTop="64dp"
                     android:text="@string/serie_poster" />
 
-                <Button
-                    android:id="@+id/favoriteAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/posters"
-                    android:layout_alignRight="@+id/posters"
-                    android:layout_below="@+id/posters"
-                    android:onClick="putFavoriteSerie"
-                    android:text="@string/serie_favorite_add" />
+            <Button
+                android:id="@+id/favoriteAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/posters"
+                android:layout_alignRight="@+id/posters"
+                android:layout_below="@+id/posters"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:onClick="putFavoriteSerie"
+                android:text="@string/serie_favorite_add" />
 
-                <Button
-                    android:id="@+id/favoriteRmv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/favoriteAdd"
-                    android:layout_alignRight="@+id/favoriteAdd"
-                    android:layout_below="@+id/favoriteAdd"
-                    android:onClick="removeFavoriteSerie"
-                    android:text="@string/serie_favorite_remove" />
+            <Button
+                android:id="@+id/favoriteRmv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/favoriteAdd"
+                android:layout_alignRight="@+id/favoriteAdd"
+                android:layout_below="@+id/favoriteAdd"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:onClick="removeFavoriteSerie"
+                android:text="@string/serie_favorite_remove" />
 
                 <TextView
                     android:id="@+id/actors"
