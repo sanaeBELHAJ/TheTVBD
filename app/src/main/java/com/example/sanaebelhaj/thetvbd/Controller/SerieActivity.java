@@ -1,4 +1,4 @@
-package com.example.sanaebelhaj.thetvbd.Views;
+package com.example.sanaebelhaj.thetvbd.Controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

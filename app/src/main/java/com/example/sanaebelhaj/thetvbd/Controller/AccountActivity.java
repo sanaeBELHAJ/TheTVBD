@@ -1,4 +1,4 @@
-package com.example.sanaebelhaj.thetvbd.Views;
+package com.example.sanaebelhaj.thetvbd.Controller;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,12 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
-import com.google.gson.Gson;
 
 import java.util.Locale;
 

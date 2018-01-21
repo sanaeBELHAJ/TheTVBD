@@ -1,4 +1,4 @@
-package com.example.sanaebelhaj.thetvbd.Views;
+package com.example.sanaebelhaj.thetvbd.Controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,15 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
-import com.example.sanaebelhaj.thetvbd.Views.Adapter.TheTVDBRepoAdapter;
-
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
