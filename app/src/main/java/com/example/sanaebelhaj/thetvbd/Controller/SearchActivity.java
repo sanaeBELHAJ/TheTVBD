@@ -66,7 +66,6 @@ public class SearchActivity extends AppCompatActivity {
 
         btnSearch.setOnClickListener(btnListenerSearch);
 
-        //init();
     }
 
     private void searchSeries(){
@@ -139,6 +138,8 @@ public class SearchActivity extends AppCompatActivity {
     private View.OnClickListener btnListenerSearch = new View.OnClickListener(){
         @Override
         public void onClick(View v){
+
+            list.clear();
 
             String valueSearch = searchText.getText().toString();
             Log.i("SEARCH_TEXT",valueSearch);
