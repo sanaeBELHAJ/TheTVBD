@@ -7,12 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.Session;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
 import retrofit2.Call;
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity{
     private EditText userkey;
     private EditText username;
     private Button login;
-
+    private Session session;//global variable
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
 
     Retrofit.Builder builder = new Retrofit.Builder()
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        session = new Session(getApplicationContext()); //in oncreate
         login = findViewById(R.id.login);
         login.setOnClickListener(btnListenerLogin);
     }
@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity{
                     //Toast.makeText(LoginActivity.this,response.body().getToken(),Toast.LENGTH_LONG).show();
                     token = response.body().getToken();
                     Log.i("LOGIN","Token => " + response.body().getToken());
+                    session.setToken(token);
                     Intent series = new Intent(LoginActivity.this, SeriesActivity.class);
                     startActivity(series);
                 }

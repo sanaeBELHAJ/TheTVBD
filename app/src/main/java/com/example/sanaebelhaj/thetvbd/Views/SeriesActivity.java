@@ -3,6 +3,7 @@ package com.example.sanaebelhaj.thetvbd.Views;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,11 +13,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.Session;
 
 public class SeriesActivity extends AppCompatActivity {
 
     private ListView listView;
-
+    private Session session;
     private String[] prenoms = new String[]{
             "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
             "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
@@ -28,6 +30,8 @@ public class SeriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
+        session = new Session(getApplicationContext());
+        Log.i("BUILD", session.getToken());
 
         listView = findViewById(R.id.list_series);
 
@@ -42,6 +46,17 @@ public class SeriesActivity extends AppCompatActivity {
 
         TheTVDBClient client =  retrofit.create(TheTVDBClient.class);
         */
+
+        /*
+        {
+            "data": {
+                "favorites": [
+                    "153021",
+                    "281662"
+                ]
+            }
+        }
+         */
 
         //Daredevil ID
         //Call<List<TheTVDBLogin>> call = client.repoSeries("281662");

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
@@ -48,7 +49,13 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        getUserInfos();
+        //getUserInfos();
+        String pseudoTxt = "Sabertooth";
+        //String language = "fr";
+        //String favoritesDisplaymode = "banners";
+
+        TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
+        pseudo.setText(pseudoTxt);
 
         //List languages
         Spinner dropdown = findViewById(R.id.list_languages);
