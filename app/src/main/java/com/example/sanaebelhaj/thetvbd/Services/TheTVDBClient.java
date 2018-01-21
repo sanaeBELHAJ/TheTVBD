@@ -67,6 +67,10 @@ public interface TheTVDBClient {
     @GET("/series/{id}")
     Call<ResponseBody> getInfos(@Header("Authorization") String token, @Path(value = "id") String id);
 
+    // Returns chapters about a serie
+    @GET("/series/{id}/episodes")
+    Call<ResponseBody> getChapters(@Header("Authorization") String token, @Path(value = "id") String id);
+
     // Returns actors about a serie
     @GET("/series/{id}/actors")
     Call<ResponseBody> getActors(@Header("Authorization") String token, @Path(value = "id") String id);

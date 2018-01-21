@@ -58,6 +58,7 @@ public class SerieActivity extends AppCompatActivity {
     private Bitmap bitmap;
     Boolean favorite;
     private final ArrayList<String> actors = new ArrayList<String>();
+    private final ArrayList<String> chapters = new ArrayList<String>();
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
@@ -100,9 +101,10 @@ public class SerieActivity extends AppCompatActivity {
                                     break;
                                 }
                                 getSerieInfos();
-                                getFavoriteSerie();
-                                getActors();
                                 getUserMark();
+                                getFavoriteSerie();
+                                getChapters();
+                                getActors();
                             }
 
                         } catch (JSONException e) {
@@ -150,6 +152,52 @@ public class SerieActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getChapters(){
+        Call<ResponseBody> call = userClient.getChapters("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
+
+                            if (data != null) {
+                                for (int i=0;i<data.length();i++) {
+                                    JSONObject serie = data.getJSONObject(i);
+                                    String name = serie.getString("episodeName");
+                                    String order = serie.getString("airedEpisodeNumber");
+                                    String season = serie.getString("airedSeason");
+                                    if(!name.equals("null"))
+                                        chapters.add(name+" ("+season+" - "+order+")");
+                                }
+                                listView = findViewById(R.id.list_chapters);
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SerieActivity.this, android.R.layout.simple_list_item_1, chapters);
+                                listView.setAdapter(adapter);
+                                Helper.getListViewSize(listView);
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
