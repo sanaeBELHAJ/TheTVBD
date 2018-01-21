@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sanaebelhaj.thetvbd.Views.AccountActivity">
+    tools:context="com.example.sanaebelhaj.thetvbd.Controller.AccountActivity">
 
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
-        android:text="@string/login" />
+        android:text="@string/username" />
 
     <TextView
         android:id="@+id/pseudoInput"
@@ -41,34 +41,12 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/emailText"
+        android:id="@+id/languageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/pseudoText"
         android:layout_alignStart="@+id/pseudoText"
         android:layout_below="@+id/pseudoText"
-        android:layout_marginTop="64dp"
-        android:text="@string/email" />
-
-    <TextView
-        android:id="@+id/emailInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/emailText"
-        android:layout_alignBottom="@+id/pseudoText"
-        android:layout_toEndOf="@+id/pseudoText"
-        android:layout_toRightOf="@+id/pseudoText"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-
-    <TextView
-        android:id="@+id/languageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/emailText"
-        android:layout_alignStart="@+id/emailText"
-        android:layout_below="@+id/emailText"
         android:layout_marginTop="64dp"
         android:text="@string/language_select" />
 
@@ -90,7 +68,7 @@
         android:layout_alignStart="@+id/languageText"
         android:layout_below="@+id/list_languages"
         android:layout_marginTop="64dp"
-        android:onClick="sendFeedback"
+        android:onClick="changeLanguage"
         android:text="@string/submit" />
 
 </RelativeLayout>
