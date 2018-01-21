@@ -50,7 +50,7 @@ public class SerieActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            id = extras.getString(SeriesActivity.IDSerie);
+            id = extras.getString(UpdatedSeriesActivity.IDSerie);
             getSerieInfos();
             getFavoriteSerie();
         }
@@ -147,7 +147,10 @@ public class SerieActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if(response.isSuccessful()){
-                    Toast.makeText(SerieActivity.this,"Done",Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    finish();
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
@@ -168,7 +171,10 @@ public class SerieActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if(response.isSuccessful()){
-                    Toast.makeText(SerieActivity.this,"Done",Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    finish();
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
@@ -191,7 +197,7 @@ public class SerieActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(SerieActivity.this, SeriesActivity.class);
+                intent = new Intent(SerieActivity.this, UpdatedSeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:

@@ -33,9 +33,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SeriesActivity extends AppCompatActivity {
+public class UpdatedSeriesActivity extends AppCompatActivity {
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private ListView listView;
+    private final ArrayList<String> list = new ArrayList<String>();
     private Session session;
     public static String IDSerie;
 
@@ -50,13 +51,12 @@ public class SeriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
         session = new Session(getApplicationContext());
-        Log.i("BUILD", session.getToken());
-
         getSeries();
     }
 
     public void getSeries(){
-        Call<ResponseBody> call = userClient.getFavorites("Bearer "+session.getToken());
+        //1514805943
+        Call<ResponseBody> call = userClient.getUpdated("Bearer "+session.getToken(), "1516532449");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -64,50 +64,80 @@ public class SeriesActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try {
                         String string = response.body().string();
-                        Log.i("BODY", string);
                         try {
-                            JSONObject data = new JSONObject(string).getJSONObject("data");
-                            JSONArray jsonArray = data.getJSONArray("favorites");
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
 
-                            final ArrayList<String> list = new ArrayList<String>();
-                            if (jsonArray != null) {
-                                int len = jsonArray.length();
-                                for (int i=0;i<len;i++) {
-                                    list.add(jsonArray.get(i).toString());
-                                    Log.i("Tableau", list.get(i));
+                            if (data != null) {
+                                for (int i=0;i<data.length();i++) {
+                                    JSONObject serie = data.getJSONObject(i);
+                                    String idSerie = serie.getString("id");
+                                    getInfos(idSerie);
                                 }
-
                                 listView = findViewById(R.id.list_series);
-
-                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SeriesActivity.this, android.R.layout.simple_list_item_1, list);
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdatedSeriesActivity.this, android.R.layout.simple_list_item_1, list);
                                 listView.setAdapter(adapter);
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                                 {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    //Toast.makeText(SeriesActivity.this, list.get(position), Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(SeriesActivity.this, SerieActivity.class);
+                                    Intent intent = new Intent(UpdatedSeriesActivity.this, SerieActivity.class);
                                     intent.putExtra(IDSerie, list.get(position));
                                     startActivity(intent);
                                     }
                                 });
                             }
-                        } catch (JSONException e) {
+                        }
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(SeriesActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(SeriesActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdatedSeriesActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(SeriesActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdatedSeriesActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getInfos(String id){
+        Call<ResponseBody> call = userClient.getInfos("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONObject data = new JSONObject(string).getJSONObject("data");
+                            String nom = data.getString("seriesName");
+                            if(nom != null && !nom.equals("null")){
+                                list.add(nom);
+                                Log.i("Nom", nom);
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                    Toast.makeText(UpdatedSeriesActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(UpdatedSeriesActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -121,19 +151,19 @@ public class SeriesActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(SeriesActivity.this, SeriesActivity.class);
+                intent = new Intent(UpdatedSeriesActivity.this, UpdatedSeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:
-                intent = new Intent(SeriesActivity.this, SearchActivity.class);
+                intent = new Intent(UpdatedSeriesActivity.this, SearchActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_account:
-                intent = new Intent(SeriesActivity.this, AccountActivity.class);
+                intent = new Intent(UpdatedSeriesActivity.this, AccountActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_logout:
-                intent = new Intent(SeriesActivity.this, LoginActivity.class);
+                intent = new Intent(UpdatedSeriesActivity.this, LoginActivity.class);
                 startActivity(intent);
                 return true;
             default:

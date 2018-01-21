@@ -130,7 +130,7 @@ public class AccountActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.menu_last_series:
-                intent = new Intent(AccountActivity.this, SeriesActivity.class);
+                intent = new Intent(AccountActivity.this, UpdatedSeriesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:

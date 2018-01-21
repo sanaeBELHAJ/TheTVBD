@@ -73,6 +73,11 @@ public interface TheTVDBClient {
      *  Series that have been recently updated.
      */
 
+    // Returns information about the serie
+    @GET("/updated/query")
+    Call<ResponseBody> getUpdated(@Header("Authorization") String token, @Query("fromTime") String fromTime);
+
+
     /**
      *  Users
      *  Routes for handling user data.
