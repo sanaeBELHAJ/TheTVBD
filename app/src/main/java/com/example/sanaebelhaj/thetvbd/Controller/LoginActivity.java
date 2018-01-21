@@ -12,7 +12,10 @@ import android.widget.Toast;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Repository.SeriesDB;
+
 import com.example.sanaebelhaj.thetvbd.Services.Session;
+
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
 import retrofit2.Call;
