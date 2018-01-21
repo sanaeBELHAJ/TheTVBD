@@ -71,7 +71,8 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
                                 for (int i=0;i<data.length();i++) {
                                     JSONObject serie = data.getJSONObject(i);
                                     String idSerie = serie.getString("id");
-                                    getInfos(idSerie);
+                                    list.add(idSerie);
+                                    //getInfos(idSerie);
                                 }
                                 listView = findViewById(R.id.list_series);
                                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdatedSeriesActivity.this, android.R.layout.simple_list_item_1, list);

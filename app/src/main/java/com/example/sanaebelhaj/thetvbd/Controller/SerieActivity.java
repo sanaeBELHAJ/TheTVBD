@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,8 @@ public class SerieActivity extends AppCompatActivity {
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private String id;
     private Session session;
+    private ListView listView;
+    private final ArrayList<String> actors = new ArrayList<String>();
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
@@ -53,6 +56,7 @@ public class SerieActivity extends AppCompatActivity {
             id = extras.getString(UpdatedSeriesActivity.IDSerie);
             getSerieInfos();
             getFavoriteSerie();
+            getActors();
         }
     }
 
@@ -65,7 +69,6 @@ public class SerieActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try {
                         String string = response.body().string();
-                        Log.i("BODY", string);
                         try {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
 
@@ -81,7 +84,56 @@ public class SerieActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(SerieActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getActors(){
+        Call<ResponseBody> call = userClient.getActors("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
+
+                            if (data != null) {
+                                for (int i=0;i<data.length();i++) {
+                                    JSONObject serie = data.getJSONObject(i);
+                                    String idSerie = serie.getString("id");
+                                    actors.add(idSerie);
+                                    //getInfos(idSerie);
+                                }
+                                listView = findViewById(R.id.list_actors);
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SerieActivity.this, android.R.layout.simple_list_item_1, actors);
+                                listView.setAdapter(adapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        //TODO : webpage de l'acteur
+                                    }
+                                });
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
@@ -147,14 +199,12 @@ public class SerieActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if(response.isSuccessful()){
-                    Intent intent = getIntent();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Intent intent = getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     finish();
                     startActivity(intent);
                 }
-                else{
+                else
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
@@ -171,14 +221,12 @@ public class SerieActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if(response.isSuccessful()){
-                    Intent intent = getIntent();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Intent intent = getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     finish();
                     startActivity(intent);
                 }
-                else{
+                else
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override

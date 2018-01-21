@@ -1,13 +1,8 @@
 package com.example.sanaebelhaj.thetvbd.Services;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBSearch;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
-import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 
-import java.util.List;
-
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -67,6 +62,10 @@ public interface TheTVDBClient {
     // Returns information about the serie
     @GET("/series/{id}")
     Call<ResponseBody> getInfos(@Header("Authorization") String token, @Path(value = "id") String id);
+
+    // Returns actors about a serie
+    @GET("/series/{id}/actors")
+    Call<ResponseBody> getActors(@Header("Authorization") String token, @Path(value = "id") String id);
 
     /**
      *  Updates
