@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="?android:attr/textColorSecondary"
     tools:context="com.example.sanaebelhaj.thetvbd.Controller.AccountActivity">
 
 
@@ -14,8 +15,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="@string/account_header"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
         android:id="@+id/pseudoText"
@@ -58,7 +60,7 @@
         android:layout_below="@+id/languageText"
         android:layout_marginTop="64dp"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/submit"
@@ -67,7 +69,8 @@
         android:layout_alignLeft="@+id/languageText"
         android:layout_alignStart="@+id/languageText"
         android:layout_below="@+id/list_languages"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorPrimary"
         android:onClick="changeLanguage"
         android:text="@string/submit" />
 

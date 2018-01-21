@@ -76,14 +76,15 @@
                     android:ems="10"
                     android:inputType="number" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/markUserText"
-                    android:layout_alignStart="@+id/markUserText"
-                    android:layout_below="@+id/markUserText"
-                    android:onClick="sendMark"
-                    android:text="@string/submit" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/markUserText"
+                android:layout_alignStart="@+id/markUserText"
+                android:layout_below="@+id/markUserText"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="sendMark"
+                android:text="@string/submit" />
 
                 <TextView
                     android:id="@+id/chaptersText"

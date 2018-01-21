@@ -41,6 +41,7 @@
             android:layout_alignBottom="@+id/searchText"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
             android:text="@string/submit" />
 
         <TextView

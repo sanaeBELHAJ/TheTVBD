@@ -86,6 +86,7 @@
         android:layout_below="@+id/usernameInput"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"
         android:text="@string/submit" />
 
     <ImageView
