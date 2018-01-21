@@ -61,7 +61,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void searchSeries(){
 
-        Call<ResponseBody> call = userClient.search("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY0ODg5MjEsImlkIjoiRVNHSV9BbmRyb2lkX3Byb2plY3QiLCJvcmlnX2lhdCI6MTUxNjQwMjUyMSwidXNlcmlkIjo0OTY2MzYsInVzZXJuYW1lIjoiU2FiZXJ0b290aDI4In0.tdI6Z8BDjyHRxUWQBsC9Q2G1yaFloVHjXMuKSEYQwuWtcTCVbsSTy6s_JAtR8q1QwffiXT5bs1WEfwMS8i3WAIPZJj_kSaqvB_trmxaa8aZ3dSj7rdTTDTqI5E_e-6QhOojMrAkzKmDp4UocyvsrpOccIJBpJo9NzY_xJj490LsPxYI-tAIVr366yCkni2HAobPKt7119aXwtkhRc2RmshdVcIQO8lYq3y3QumM2OwRKO2JLQ0G3jwQMwqjLMS_QS0ETE40x-UtCmrgLCFYmkLP_ubTsshMb7Ruz4cxLFsVIBFru2qOG9xkbOHqBQvjD36vCyDo6-XbX76qVU17bgA",searchText.getText().toString());
+        Call<ResponseBody> call = userClient.search("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY1NjU3NDEsImlkIjoiRVNHSV9BbmRyb2lkX3Byb2plY3QiLCJvcmlnX2lhdCI6MTUxNjQ3OTM0MSwidXNlcmlkIjo0OTY2MzYsInVzZXJuYW1lIjoiU2FiZXJ0b290aDI4In0.br6ZVQy6c-bPg1n9CK2gWT-dQcYEErCGo_e9flPm0CAP43RSwwFrpeUhNKCiuQ9Y-N4DvOiy67w09KQifagipWMVRq4IhIscaKUNdFDZ2bJfk5ibrFQOWeF86ceDYnGb7zirqLX_dtU8xofr-yVQyXX-tG7k1rHvR-pdJpOErcLVpWcYZ2yCG-g5Qhmi7siUvPvcWX5A8WSTwIHN3U3b2OZqRb9IVEv20P4e3dCAH87ygQU7p213BywKrEduNjJWwrHNYFrhC4zivvFGcLdRdHjAUl5WWoLJeoZWZvxHCcItEJaZA0HH_np6pj5s9UveRyRhflJlMS4GYZR3xiZyOg",searchText.getText().toString());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

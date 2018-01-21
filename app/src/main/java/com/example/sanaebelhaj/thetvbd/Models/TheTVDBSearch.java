@@ -7,7 +7,6 @@ package com.example.sanaebelhaj.thetvbd.Models;
 public class TheTVDBSearch {
 
     private int id;
-    private String aliases;
     private String banner;
     private String firstAired;
     private String network;
@@ -17,10 +16,6 @@ public class TheTVDBSearch {
 
     public int getId() {
         return id;
-    }
-
-    public String getAliases() {
-        return aliases;
     }
 
     public String getBanner() {
