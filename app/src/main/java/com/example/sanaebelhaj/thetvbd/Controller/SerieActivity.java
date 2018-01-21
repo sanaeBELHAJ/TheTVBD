@@ -1,6 +1,9 @@
 package com.example.sanaebelhaj.thetvbd.Controller;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +28,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,6 +54,8 @@ public class SerieActivity extends AppCompatActivity {
     private ListView listView;
     private Button buttonAdd;
     private Button buttonRmv;
+    private ImageView bannerImage;
+    private Bitmap bitmap;
     Boolean favorite;
     private final ArrayList<String> actors = new ArrayList<String>();
     private final ArrayList<String> chapters = new ArrayList<String>();
@@ -123,6 +136,11 @@ public class SerieActivity extends AppCompatActivity {
                         String string = response.body().string();
                         try {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
+
+                            String bannerImageURL = "https://www.thetvdb.com/banners/"+data.getString("banner");
+
+                            new DownloadImageTask((ImageView) findViewById(R.id.bannerImage))
+                                    .execute(bannerImageURL);
 
                             TextView name = (TextView) findViewById(R.id.nameTVDB);
                             name.setText(data.getString("seriesName"));
@@ -430,6 +448,31 @@ public class SerieActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }
