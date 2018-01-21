@@ -6,13 +6,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.Session;
+import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SerieActivity extends AppCompatActivity {
-
+    private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private Session session;
+    Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl(THETVDB_URL_API)
+            .addConverterFactory(GsonConverterFactory.create());
+    Retrofit retrofit = builder.build();
+    TheTVDBClient userClient = retrofit.create(TheTVDBClient.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,21 +45,36 @@ public class SerieActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         Log.i("BUILD", session.getToken());
 
-        //Daredevil ID
-        //Call<List<TheTVDBLogin>> call = client.repoSeries("281662");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null)
+            getSerie(extras.getString(SeriesActivity.IDSerie));
+    }
 
-        /*call.enqueue(new Callback<List<TheTVDBLogin>>() {
-        @Override
-            public void onResponse(Call<List<TheTVDBLogin>> call, Response<List<TheTVDBLogin>> response) {
-                List<TheTVDBLogin> repos = response.body();
-                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(SeriesActivity.this,repos));
+    public void getSerie(String id){
+        Call<ResponseBody> call = userClient.getInfos("Bearer "+session.getToken(), id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        Log.i("BODY", string);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(SerieActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<TheTVDBLogin>> call, Throwable t) {
-                Toast.makeText(SeriesActivity.this, "error :(",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

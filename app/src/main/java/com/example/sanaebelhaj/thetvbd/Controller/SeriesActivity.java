@@ -37,6 +37,7 @@ public class SeriesActivity extends AppCompatActivity {
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private ListView listView;
     private Session session;
+    public static String IDSerie;
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
@@ -86,6 +87,7 @@ public class SeriesActivity extends AppCompatActivity {
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     //Toast.makeText(SeriesActivity.this, list.get(position), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SeriesActivity.this, SerieActivity.class);
+                                    intent.putExtra(IDSerie, list.get(position));
                                     startActivity(intent);
                                     }
                                 });

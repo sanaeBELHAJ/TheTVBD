@@ -62,6 +62,10 @@ public interface TheTVDBClient {
      *  Information about a specific series
      */
 
+    // Returns information about the serie
+    @GET("/series/{id}")
+    Call<ResponseBody> getInfos(@Header("Authorization") String token, @Path(value = "id") String id);
+
     /**
      *  Updates
      *  Series that have been recently updated.
@@ -77,7 +81,7 @@ public interface TheTVDBClient {
     Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
 
 
-    // Returns basic information about the currently authenticated user.
+    // Returns list of the favorites series for the user
     @GET("/user/favorites")
     Call<ResponseBody> getFavorites(@Header("Authorization") String token);
 }
