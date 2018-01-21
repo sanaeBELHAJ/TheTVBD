@@ -3,6 +3,7 @@ package com.example.sanaebelhaj.thetvbd.Services;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBLogin;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBSearch;
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBToken;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public interface TheTVDBClient {
      *  Search
      *  Search for a particular series
      */
+    @SerializedName("data")
     @GET("/search/series")
     Call <ResponseBody> search(@Header("Authorization") String token,@Query("name") String keywords);
 

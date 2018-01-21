@@ -17,6 +17,11 @@ import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 import com.example.sanaebelhaj.thetvbd.Views.Adapter.TheTVDBRepoAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -66,8 +71,22 @@ public class SearchActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                 if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
+
+                            Log.i("DATA =>", data.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                     Toast.makeText(SearchActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -77,7 +96,8 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(SearchActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this,"Fatal error :(",Toast.LENGTH_SHORT).show();
+                Log.i("MESSAGE_ERROR =>", t.getMessage());
             }
         });
     }
