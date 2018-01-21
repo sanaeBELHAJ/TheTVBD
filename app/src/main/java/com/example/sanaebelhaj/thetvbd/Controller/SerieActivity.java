@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ public class SerieActivity extends AppCompatActivity {
     private String id;
     private Session session;
     private ListView listView;
+    private Button buttonAdd;
+    private Button buttonRmv;
+    Boolean favorite;
     private final ArrayList<String> actors = new ArrayList<String>();
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
@@ -51,11 +55,14 @@ public class SerieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_serie);
         session = new Session(getApplicationContext());
         Log.i("BUILD", session.getToken());
-
+        buttonAdd = (Button)findViewById(R.id.favoriteAdd);
+        buttonRmv = (Button)findViewById(R.id.favoriteRmv);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             id = extras.getString(UpdatedSeriesActivity.IDSerie);
             getSerieInfos();
+            buttonAdd.setVisibility(View.GONE);
+            buttonRmv.setVisibility(View.GONE);
             getFavoriteSerie();
             getActors();
             getUserMark();
@@ -229,17 +236,23 @@ public class SerieActivity extends AppCompatActivity {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
                             JSONArray jsonArray = data.getJSONArray("favorites");
 
-                            final ArrayList<String> list = new ArrayList<String>();
                             if (jsonArray != null) {
                                 int len = jsonArray.length();
-                                for (int i=0;i<len;i++)
-                                    list.add(jsonArray.get(i).toString());
-
-                                if(Arrays.asList(list).contains(id)){
-                                    //remove
+                                favorite = false;
+                                for (int i=0;i<len;i++) {
+                                    if(id.equals(jsonArray.get(i).toString())) {
+                                        favorite = true;
+                                        break;
+                                    }
                                 }
-                                else{
-                                    //put
+
+                                if(favorite) {
+                                    Log.i("Favoris","OUI");
+                                    buttonRmv.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    Log.i("Favoris","NON");
+                                    buttonAdd.setVisibility(View.VISIBLE);
                                 }
                             }
                         } catch (JSONException e) {
