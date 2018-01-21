@@ -17,7 +17,14 @@
             android:orientation="vertical">
 
 
-                <TextView
+            <ImageView
+                android:id="@+id/bannerImage"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/defaultpicture"
+            />
+
+            <TextView
                     android:id="@+id/nameTVDB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
