@@ -59,35 +59,31 @@ public class AccountActivity extends AppCompatActivity {
 
     public void getUserInfos(){
         Call<ResponseBody> call = userClient.getUserInfo("Bearer "+session.getToken());
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                if(response.isSuccessful()){
+        try {
+            Response<ResponseBody> response = call.execute();
+
+            if(response.isSuccessful()){
+                try {
+                    String string = response.body().string();
+                    Log.i("BODY", string);
                     try {
-                        String string = response.body().string();
-                        Log.i("BODY", string);
-                        try {
-                            JSONObject data = new JSONObject(string).getJSONObject("data");
-                            TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
-                            pseudo.setText(data.getString("userName"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (IOException e) {
+                        JSONObject data = new JSONObject(string).getJSONObject("data");
+                        TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
+                        pseudo.setText(data.getString("userName"));
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
-                    Toast.makeText(AccountActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            else{
+                Toast.makeText(AccountActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
             }
-        });
+        } catch (IOException e) {
+            Toast.makeText(AccountActivity.this,"Network Failure :(",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Change language

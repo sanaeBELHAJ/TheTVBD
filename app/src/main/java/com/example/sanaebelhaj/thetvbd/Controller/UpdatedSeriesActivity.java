@@ -110,6 +110,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
 
     public void getInfos(String id){
         Call<ResponseBody> call = userClient.getInfos("Bearer "+session.getToken(), id);
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
