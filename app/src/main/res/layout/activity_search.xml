@@ -43,18 +43,14 @@
             android:layout_alignParentRight="true"
             android:text="@string/submit" />
 
-        <TextView
-            android:id="@+id/textViewLog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+        <ListView
+            android:id="@+id/searchResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/searchText"
-            android:layout_marginTop="18dp"
-            android:text="TextView" />
+            android:layout_marginTop="13dp" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
