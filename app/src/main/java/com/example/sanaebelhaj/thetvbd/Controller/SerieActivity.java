@@ -149,7 +149,46 @@ public class SerieActivity extends AppCompatActivity {
     }
 
     public void getUserMark(){
+        Call<ResponseBody> call = userClient.getRatings("Bearer "+session.getToken());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        try {
+                            JSONArray data = new JSONObject(string).getJSONArray("data");
+
+                            if (data != null) {
+                                for (int i=0;i<data.length();i++) {
+                                    JSONObject serie = data.getJSONObject(i);
+                                    String idSerie = serie.getString("ratingItemId");
+                                    if(idSerie.equals(id)) {
+                                        String mark = serie.getString("rating");
+                                        EditText editText = (EditText)findViewById(R.id.markUserText);
+                                        editText.setText(mark, TextView.BufferType.EDITABLE);
+                                    }
+                                }
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                    Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void sendMark(View v){

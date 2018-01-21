@@ -1,140 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sanaebelhaj.thetvbd.Controller.SerieActivity">
 
-    <TextView
-        android:id="@+id/nameTVDB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="5dp" />
-
-    <TextView
-        android:id="@+id/markTVDB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_mark_tvdb" />
-
-    <TextView
-        android:id="@+id/markTVDBText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/markTVDB"
-        android:layout_alignBottom="@+id/markTVDB"
-        android:layout_toEndOf="@+id/markTVDB"
-        android:layout_toRightOf="@+id/markTVDB"
-        android:ems="10"/>
-
-
-
-    <TextView
-        android:id="@+id/markUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/markTVDB"
-        android:layout_alignStart="@+id/markTVDB"
-        android:layout_below="@+id/markTVDB"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_mark_user" />
-
-    <TextView
-        android:id="@+id/markUserText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/markUser"
-        android:layout_alignBottom="@+id/markUser"
-        android:layout_alignLeft="@+id/markTVDBText"
-        android:layout_alignStart="@+id/markTVDBText"
-        android:ems="10" />
-
-
-    <TextView
-        android:id="@+id/chaptersText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/markUser"
-        android:layout_alignStart="@+id/markUser"
-        android:layout_below="@+id/markUser"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_chapters" />
-
-    <TextView
-        android:id="@+id/pictures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/chaptersText"
-        android:layout_alignStart="@+id/chaptersText"
-        android:layout_below="@+id/chaptersText"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_pictures" />
-
-    <TextView
-        android:id="@+id/posters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pictures"
-        android:layout_alignStart="@+id/pictures"
-        android:layout_below="@+id/pictures"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_poster" />
-
-    <TextView
-        android:id="@+id/actors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/posters"
-        android:layout_alignStart="@+id/posters"
-        android:layout_below="@+id/posters"
-        android:layout_marginTop="64dp"
-        android:text="@string/serie_actor" />
-
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_actors_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/nameTVDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/markTVDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_mark_tvdb" />
+
+        <TextView
+            android:id="@+id/markTVDBText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/markTVDB"
+            android:layout_alignBottom="@+id/markTVDB"
+            android:layout_toEndOf="@+id/markTVDB"
+            android:layout_toRightOf="@+id/markTVDB"
+            android:ems="10"/>
+
+
+
+        <TextView
+            android:id="@+id/markUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/markTVDB"
+            android:layout_alignStart="@+id/markTVDB"
+            android:layout_below="@+id/markTVDB"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_mark_user" />
+
+        <EditText
+            android:id="@+id/markUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/markUser"
+            android:layout_alignBottom="@+id/markUser"
+            android:layout_alignLeft="@+id/markTVDBText"
+            android:layout_alignStart="@+id/markTVDBText"
+            android:inputType="number"
+            android:ems="10" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/markUserText"
+            android:layout_alignLeft="@+id/markUserText"
+            android:layout_below="@+id/markUserText"
+            android:onClick="sendMark"
+            android:text="@string/submit"/>
+
+
+        <TextView
+            android:id="@+id/chaptersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/markUser"
+            android:layout_alignStart="@+id/markUser"
+            android:layout_below="@+id/markUser"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_chapters" />
+
+        <TextView
+            android:id="@+id/pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/chaptersText"
+            android:layout_alignStart="@+id/chaptersText"
+            android:layout_below="@+id/chaptersText"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_pictures" />
+
+        <TextView
+            android:id="@+id/posters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pictures"
+            android:layout_alignStart="@+id/pictures"
+            android:layout_below="@+id/pictures"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_poster" />
+
+        <TextView
+            android:id="@+id/actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/posters"
+            android:layout_alignStart="@+id/posters"
+            android:layout_below="@+id/posters"
+            android:layout_marginTop="64dp"
+            android:text="@string/serie_actor" />
 
         <ListView
             android:id="@+id/list_actors"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_below="@+id/actors"
             android:layout_marginTop="24dp" />
 
+        <Button
+            android:id="@+id/favoriteAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/actors"
+            android:layout_alignRight="@+id/actors"
+            android:layout_below="@+id/list_actors"
+            android:onClick="putFavoriteSerie"
+            android:text="@string/serie_favorite_add" />
+
+        <Button
+            android:id="@+id/favoriteRmv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/favoriteAdd"
+            android:layout_alignRight="@+id/favoriteAdd"
+            android:layout_below="@+id/favoriteAdd"
+            android:onClick="removeFavoriteSerie"
+            android:text="@string/serie_favorite_remove" />
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/favoriteAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/actors"
-        android:layout_alignRight="@+id/actors"
-        android:layout_below="@+id/actors"
-        android:onClick="putFavoriteSerie"
-        android:text="@string/serie_favorite_add" />
-
-    <Button
-        android:id="@+id/favoriteRmv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/favoriteAdd"
-        android:layout_alignRight="@+id/favoriteAdd"
-        android:layout_below="@+id/favoriteAdd"
-        android:onClick="removeFavoriteSerie"
-        android:text="@string/serie_favorite_remove" />
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
