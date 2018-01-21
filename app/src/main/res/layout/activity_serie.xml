@@ -16,12 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/nameTVDB"
@@ -59,7 +53,6 @@
                     android:layout_toRightOf="@+id/markTVDB"
                     android:ems="10" />
 
-
                 <TextView
                     android:id="@+id/markUser"
                     android:layout_width="wrap_content"
@@ -91,7 +84,6 @@
                     android:layout_below="@+id/markUserText"
                     android:onClick="sendMark"
                     android:text="@string/submit" />
-
 
                 <TextView
                     android:id="@+id/chaptersText"
@@ -152,14 +144,23 @@
                     android:layout_below="@+id/favoriteAdd"
                     android:layout_marginTop="64dp"
                     android:text="@string/serie_actor" />
-            </FrameLayout>
 
-            <ListView
-                android:id="@+id/list_actors"
+
+            <!--<RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@+id/frame"
-                android:layout_marginTop="24dp" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/favoriteRmv"
+                >-->
+
+                <ListView
+                    android:id="@+id/list_actors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+            <!--</RelativeLayout>-->
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

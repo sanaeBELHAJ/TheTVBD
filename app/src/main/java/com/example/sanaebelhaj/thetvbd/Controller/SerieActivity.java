@@ -246,14 +246,10 @@ public class SerieActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                if(favorite) {
-                                    Log.i("Favoris","OUI");
+                                if(favorite)
                                     buttonRmv.setVisibility(View.VISIBLE);
-                                }
-                                else {
-                                    Log.i("Favoris","NON");
+                                else
                                     buttonAdd.setVisibility(View.VISIBLE);
-                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
