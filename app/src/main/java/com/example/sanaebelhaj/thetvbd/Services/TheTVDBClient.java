@@ -74,5 +74,5 @@ public interface TheTVDBClient {
 
     // Returns basic information about the currently authenticated user.
     @GET("/user")
-    Call<TheTVDBUser> getUserInfo(@Header("Authorization") String token);
+    Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
 }

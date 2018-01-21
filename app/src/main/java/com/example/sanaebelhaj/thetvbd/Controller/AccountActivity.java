@@ -18,6 +18,10 @@ import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.Session;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -29,10 +33,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class AccountActivity extends AppCompatActivity {
-    private static String token;
     private static ResponseBody infos;
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private Session session;
+    
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
@@ -49,7 +53,7 @@ public class AccountActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         Log.i("BUILD", session.getToken());
 
-        //getUserInfos();
+        getUserInfos();
         String pseudoTxt = "Sabertooth";
         //String language = "fr";
         //String favoritesDisplaymode = "banners";
@@ -65,14 +69,24 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void getUserInfos(){
-        Call<TheTVDBUser> call = userClient.getUserInfo("Bearer "+session.getToken());
-        call.enqueue(new Callback<TheTVDBUser>() {
+        Call<ResponseBody> call = userClient.getUserInfo("Bearer "+session.getToken());
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<TheTVDBUser> call, Response<TheTVDBUser> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if(response.isSuccessful()){
-                    System.out.print(response.body());
-                    Log.i("BODY", response.body().getData());
+                    try {
+                        String string = response.body().string();
+                        Log.i("BODY", string);
+                        try {
+                            JSONObject data = new JSONObject(string).getJSONObject("data");
+                            Log.i("Username" ,data.getString("userName"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(AccountActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -81,7 +95,7 @@ public class AccountActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<TheTVDBUser> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(AccountActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
         });
