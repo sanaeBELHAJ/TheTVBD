@@ -57,6 +57,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
     public void getSeries(){
         //1514805943
         Call<ResponseBody> call = userClient.getUpdated("Bearer "+session.getToken(), "1516532449");
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
