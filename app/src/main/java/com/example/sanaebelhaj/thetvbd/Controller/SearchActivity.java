@@ -100,10 +100,10 @@ public class SearchActivity extends AppCompatActivity {
                                         @Override
                                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                             Intent intent = new Intent(SearchActivity.this, SerieActivity.class);
-                                            intent.putExtra(NameSerie, list.get(position));
+                                            intent.putExtra(NameSerie, list.get(position).toString());
                                             startActivity(intent);
                                         }
-                                    }.OnItemClickListener() );
+                                    });
                                 }
                             }
 
