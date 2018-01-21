@@ -86,6 +86,9 @@ public interface TheTVDBClient {
     @GET("/user")
     Call<ResponseBody> getUserInfo(@Header("Authorization") String token);
 
+    // Set a mark for a serie by the user
+    @PUT("/user/ratings/{itemType}/{itemId}/{itemRating}")
+    Call<ResponseBody> setRatings(@Header("Authorization") String token,@Path(value = "itemType") String itemType, @Path(value = "itemId") String itemId, @Path(value = "itemRating") String itemRating);
 
     // Returns list of the favorites series for the user
     @GET("/user/favorites")

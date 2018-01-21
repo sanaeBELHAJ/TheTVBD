@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class SerieActivity extends AppCompatActivity {
             getSerieInfos();
             getFavoriteSerie();
             getActors();
+            getUserMark();
         }
     }
 
@@ -111,9 +113,9 @@ public class SerieActivity extends AppCompatActivity {
                             if (data != null) {
                                 for (int i=0;i<data.length();i++) {
                                     JSONObject serie = data.getJSONObject(i);
-                                    String idSerie = serie.getString("id");
-                                    actors.add(idSerie);
-                                    //getInfos(idSerie);
+                                    String name = serie.getString("name");
+                                    String role = serie.getString("role");
+                                    actors.add(name+" ("+role+")");
                                 }
                                 listView = findViewById(R.id.list_actors);
                                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SerieActivity.this, android.R.layout.simple_list_item_1, actors);
@@ -146,6 +148,36 @@ public class SerieActivity extends AppCompatActivity {
         });
     }
 
+    public void getUserMark(){
+
+    }
+
+    public void sendMark(View v){
+        EditText markText = (EditText) findViewById(R.id.markUserText);
+        Integer mark = Integer.parseInt(markText.getText().toString());
+        if(mark != null && mark >= 0 && mark <= 10){
+            Call<ResponseBody> call = userClient.setRatings("Bearer "+session.getToken(), "series", id, mark.toString());
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if(response.isSuccessful()){
+                        Intent intent = getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        finish();
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(SerieActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else
+            Toast.makeText(SerieActivity.this,"Incorrect value",Toast.LENGTH_LONG).show();
+    }
+
     public void getFavoriteSerie(){
         Call<ResponseBody> call = userClient.getFavorites("Bearer "+session.getToken());
         call.enqueue(new Callback<ResponseBody>() {
@@ -154,7 +186,6 @@ public class SerieActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try {
                         String string = response.body().string();
-                        Log.i("BODY", string);
                         try {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
                             JSONArray jsonArray = data.getJSONArray("favorites");
@@ -178,7 +209,6 @@ public class SerieActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(SerieActivity.this,"Response OK",Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(SerieActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
