@@ -40,8 +40,6 @@ public class AccountActivity extends AppCompatActivity {
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
-
-
     Retrofit retrofit = builder.build();
     TheTVDBClient userClient = retrofit.create(TheTVDBClient.class);
 

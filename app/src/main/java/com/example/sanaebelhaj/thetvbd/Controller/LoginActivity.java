@@ -41,7 +41,9 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        session = new Session(getApplicationContext()); //in oncreate
+        session = new Session(getApplicationContext());
+        //Put the token value on NULL when the user logout
+        session.setToken("");
         login = findViewById(R.id.login);
         login.setOnClickListener(btnListenerLogin);
     }

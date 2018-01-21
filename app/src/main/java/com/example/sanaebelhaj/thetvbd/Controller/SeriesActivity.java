@@ -10,21 +10,39 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.R;
 import com.example.sanaebelhaj.thetvbd.Services.Session;
+import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SeriesActivity extends AppCompatActivity {
-
+    private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private ListView listView;
     private Session session;
-    private String[] prenoms = new String[]{
-            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
-            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
-            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
-            "Yann", "Zoé"
-    };
+
+    Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl(THETVDB_URL_API)
+            .addConverterFactory(GsonConverterFactory.create());
+    Retrofit retrofit = builder.build();
+    TheTVDBClient userClient = retrofit.create(TheTVDBClient.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,57 +51,61 @@ public class SeriesActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         Log.i("BUILD", session.getToken());
 
-        listView = findViewById(R.id.list_series);
+        getSeries();
+    }
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SeriesActivity.this,
-                android.R.layout.simple_list_item_1, prenoms);
-        listView.setAdapter(adapter);
+    public void getSeries(){
+        Call<ResponseBody> call = userClient.getFavorites("Bearer "+session.getToken());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-        /*Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.thetvdb.com/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
+                if(response.isSuccessful()){
+                    try {
+                        String string = response.body().string();
+                        Log.i("BODY", string);
+                        try {
+                            JSONObject data = new JSONObject(string).getJSONObject("data");
+                            JSONArray jsonArray = data.getJSONArray("favorites");
 
-        TheTVDBClient client =  retrofit.create(TheTVDBClient.class);
-        */
+                            final ArrayList<String> list = new ArrayList<String>();
+                            if (jsonArray != null) {
+                                int len = jsonArray.length();
+                                for (int i=0;i<len;i++) {
+                                    list.add(jsonArray.get(i).toString());
+                                    Log.i("Tableau", list.get(i));
+                                }
 
-        /*
-        {
-            "data": {
-                "favorites": [
-                    "153021",
-                    "281662"
-                ]
-            }
-        }
-         */
+                                listView = findViewById(R.id.list_series);
 
-        //Daredevil ID
-        //Call<List<TheTVDBLogin>> call = client.repoSeries("281662");
-
-        /*call.enqueue(new Callback<List<TheTVDBLogin>>() {
-        @Override
-            public void onResponse(Call<List<TheTVDBLogin>> call, Response<List<TheTVDBLogin>> response) {
-                List<TheTVDBLogin> repos = response.body();
-                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(SeriesActivity.this,repos));
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SeriesActivity.this, android.R.layout.simple_list_item_1, list);
+                                listView.setAdapter(adapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    //Toast.makeText(SeriesActivity.this, list.get(position), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SeriesActivity.this, SerieActivity.class);
+                                    startActivity(intent);
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(SeriesActivity.this,"Response OK",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(SeriesActivity.this,"error HTTP code " + response.code(),Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<TheTVDBLogin>> call, Throwable t) {
-                Toast.makeText(SeriesActivity.this, "error :(",Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SeriesActivity.this, prenoms[position], Toast.LENGTH_SHORT).show();
-                //TODO : Transmettre la valeur de l'item sélectionné à l'activité de la série ciblée
-                Intent intent = new Intent(SeriesActivity.this, SerieActivity.class);
-                startActivity(intent);
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SeriesActivity.this,"error :(",Toast.LENGTH_SHORT).show();
             }
         });
     }

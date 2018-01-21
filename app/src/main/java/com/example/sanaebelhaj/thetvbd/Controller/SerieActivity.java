@@ -19,6 +19,22 @@ public class SerieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_serie);
         session = new Session(getApplicationContext());
         Log.i("BUILD", session.getToken());
+
+        //Daredevil ID
+        //Call<List<TheTVDBLogin>> call = client.repoSeries("281662");
+
+        /*call.enqueue(new Callback<List<TheTVDBLogin>>() {
+        @Override
+            public void onResponse(Call<List<TheTVDBLogin>> call, Response<List<TheTVDBLogin>> response) {
+                List<TheTVDBLogin> repos = response.body();
+                listView.setAdapter((ListAdapter) new TheTVDBRepoAdapter(SeriesActivity.this,repos));
+            }
+
+            @Override
+            public void onFailure(Call<List<TheTVDBLogin>> call, Throwable t) {
+                Toast.makeText(SeriesActivity.this, "error :(",Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
