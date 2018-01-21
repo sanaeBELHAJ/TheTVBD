@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="100dp"
         android:text="@string/apikey" />
 
     <EditText
@@ -40,7 +40,7 @@
         android:layout_alignLeft="@+id/apikeyText"
         android:layout_alignStart="@+id/apikeyText"
         android:layout_below="@+id/apikeyText"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="30dp"
         android:text="@string/userkey" />
 
     <EditText
@@ -63,7 +63,7 @@
         android:layout_alignLeft="@+id/userkeytext"
         android:layout_alignStart="@+id/userkeytext"
         android:layout_below="@+id/userkeytext"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="30dp"
         android:text="@string/username" />
 
     <EditText
@@ -87,5 +87,23 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/submit" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/apikeyInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@android:color/background_light" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        app:srcCompat="@drawable/logo" />
 
 </RelativeLayout>
