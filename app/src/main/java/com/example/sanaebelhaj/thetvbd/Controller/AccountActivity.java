@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.sanaebelhaj.thetvbd.Models.TheTVDBUser;
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.Session;
 import com.example.sanaebelhaj.thetvbd.Services.TheTVDBClient;
 
 import java.util.Locale;
@@ -31,7 +32,7 @@ public class AccountActivity extends AppCompatActivity {
     private static String token;
     private static ResponseBody infos;
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
-
+    private Session session;
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
@@ -45,6 +46,8 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        session = new Session(getApplicationContext());
+        Log.i("BUILD", session.getToken());
 
         //getUserInfos();
         String pseudoTxt = "Sabertooth";
@@ -62,7 +65,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void getUserInfos(){
-        Call<TheTVDBUser> call = userClient.getUserInfo("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY1NjU3NDEsImlkIjoiRVNHSV9BbmRyb2lkX3Byb2plY3QiLCJvcmlnX2lhdCI6MTUxNjQ3OTM0MSwidXNlcmlkIjo0OTY2MzYsInVzZXJuYW1lIjoiU2FiZXJ0b290aDI4In0.br6ZVQy6c-bPg1n9CK2gWT-dQcYEErCGo_e9flPm0CAP43RSwwFrpeUhNKCiuQ9Y-N4DvOiy67w09KQifagipWMVRq4IhIscaKUNdFDZ2bJfk5ibrFQOWeF86ceDYnGb7zirqLX_dtU8xofr-yVQyXX-tG7k1rHvR-pdJpOErcLVpWcYZ2yCG-g5Qhmi7siUvPvcWX5A8WSTwIHN3U3b2OZqRb9IVEv20P4e3dCAH87ygQU7p213BywKrEduNjJWwrHNYFrhC4zivvFGcLdRdHjAUl5WWoLJeoZWZvxHCcItEJaZA0HH_np6pj5s9UveRyRhflJlMS4GYZR3xiZyOg");
+        Call<TheTVDBUser> call = userClient.getUserInfo("Bearer "+session.getToken());
         call.enqueue(new Callback<TheTVDBUser>() {
             @Override
             public void onResponse(Call<TheTVDBUser> call, Response<TheTVDBUser> response) {

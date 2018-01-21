@@ -3,18 +3,22 @@ package com.example.sanaebelhaj.thetvbd.Controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.sanaebelhaj.thetvbd.R;
+import com.example.sanaebelhaj.thetvbd.Services.Session;
 
 public class SerieActivity extends AppCompatActivity {
 
-
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_serie);
+        session = new Session(getApplicationContext());
+        Log.i("BUILD", session.getToken());
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
