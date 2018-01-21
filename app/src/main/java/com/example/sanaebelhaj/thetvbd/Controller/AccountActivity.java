@@ -36,7 +36,7 @@ public class AccountActivity extends AppCompatActivity {
     private static ResponseBody infos;
     private final String THETVDB_URL_API = "https://api.thetvdb.com";
     private Session session;
-    
+
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
             .addConverterFactory(GsonConverterFactory.create());
@@ -54,12 +54,10 @@ public class AccountActivity extends AppCompatActivity {
         Log.i("BUILD", session.getToken());
 
         getUserInfos();
-        String pseudoTxt = "Sabertooth";
         //String language = "fr";
         //String favoritesDisplaymode = "banners";
 
-        TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
-        pseudo.setText(pseudoTxt);
+
 
         //List languages
         Spinner dropdown = findViewById(R.id.list_languages);
@@ -77,10 +75,11 @@ public class AccountActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try {
                         String string = response.body().string();
-                        Log.i("BODY", string);
+                        //Log.i("BODY", string);
                         try {
                             JSONObject data = new JSONObject(string).getJSONObject("data");
-                            Log.i("Username" ,data.getString("userName"));
+                            TextView pseudo = (TextView) findViewById(R.id.pseudoInput);
+                            pseudo.setText(data.getString("userName"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
