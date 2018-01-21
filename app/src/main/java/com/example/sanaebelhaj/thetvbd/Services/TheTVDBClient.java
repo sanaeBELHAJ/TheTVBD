@@ -59,6 +59,10 @@ public interface TheTVDBClient {
      *  Information about a specific series
      */
 
+    //Bring the id of the serie
+    @GET("/search/series")
+    Call<ResponseBody> searchSerie(@Header("Authorization") String token, @Query("name") String name);
+
     // Returns information about the serie
     @GET("/series/{id}")
     Call<ResponseBody> getInfos(@Header("Authorization") String token, @Path(value = "id") String id);

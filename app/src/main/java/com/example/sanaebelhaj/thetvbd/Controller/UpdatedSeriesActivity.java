@@ -38,7 +38,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
     private ListView listView;
     private final ArrayList<String> list = new ArrayList<String>();
     private Session session;
-    public static String IDSerie;
+    public static String NameSerie;
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(THETVDB_URL_API)
@@ -82,7 +82,7 @@ public class UpdatedSeriesActivity extends AppCompatActivity {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Intent intent = new Intent(UpdatedSeriesActivity.this, SerieActivity.class);
-                                    intent.putExtra(IDSerie, list.get(position));
+                                    intent.putExtra(NameSerie, list.get(position));
                                     startActivity(intent);
                                     }
                                 });
